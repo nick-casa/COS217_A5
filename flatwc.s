@@ -9,7 +9,7 @@
 
         .section .rodata
 
-promptString:
+promptStr:
     .string "%7ld %7ld %7ld\n"
 
 //----------------------------------------------------------------------

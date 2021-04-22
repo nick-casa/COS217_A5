@@ -123,8 +123,8 @@ endif1:
 endInputLoop:
     // if (!iInWord) goto endif;
     adr     x0, iInWord
-    ldr     w0, [x0]
-    cmp     w0, FALSE
+    ldr     x0, [x0]
+    cmp     x0, FALSE
     beq     endif
 
     // lWordCount++;

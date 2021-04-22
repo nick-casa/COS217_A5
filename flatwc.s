@@ -57,12 +57,30 @@ inputLoop:
     str     x1, [x0]
 
     // if (!isspace(iChar)) goto else1; // if 1
+    adr     x0, iChar
+    ldr     x0, [x0]
+    bl      isspace
+    cmp     w0, FALSE
+    beq     else1
 
     // if (!iInWord) goto endif1; // if 2
+    adr     x0, iInWord
+    ldr     x0, [x0]
+    cmp     x0, FALSE
+    beq     endif1
 
     // lWordCount++;
+    adr     x0, lWordCount
+    ldr     x1, [x0]
+    add     x1, x1, 1
+    str     x1, [x0]
+
     // iInWord = FALSE;
+    adr     x0, iInWord
+    str     FALSE, [x0]
+
     // goto endif1;
+    b endif1
 else1:
     // if (iInWord) goto endif1;
     // iInWord = TRUE;

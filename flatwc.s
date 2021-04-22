@@ -85,8 +85,8 @@ inputLoop:
 
     // iInWord = FALSE;
     adr     x0, iInWord
-    mov     w1, FALSE
-    str     w1, [x0]
+    mov     x1, FALSE
+    str     x1, [x0]
 
     // goto endif1;
     b       endif1
@@ -133,8 +133,6 @@ endInputLoop:
     add     x1, x1, 1
     str     x1, [x0]
 
-    // goto endif
-    b       endif
 endif:
     // printf("%7ld %7ld %7ld\n", lLineCount, lWordCount, lCharCount);
     adr     x0, promptStr

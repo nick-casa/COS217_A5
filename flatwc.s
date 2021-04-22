@@ -10,7 +10,7 @@
         .section .rodata
 
 newLine:
-    .string '\n'
+    .string "\n"
 
 promptStr:
     .string "%7ld %7ld %7ld\n"

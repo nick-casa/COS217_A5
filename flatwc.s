@@ -109,6 +109,7 @@ endif1:
     adr     x0, iChar
     ldr     w0, [x0]
     adr     x1, newLine
+
     cmp     w0, w1
     bne     endInputLoop
 
@@ -137,8 +138,11 @@ endif:
     // printf("%7ld %7ld %7ld\n", lLineCount, lWordCount, lCharCount);
     adr     x0, promptStr
     adr     x1, lLineCount
+    ldr     x1, [x1]
     adr     x2, lWordCount
+    ldr     x2, [x2]
     adr     x3, lCharCount
+    ldr     x3, [x3]
     bl      printf
 
     // Epilog and return 0

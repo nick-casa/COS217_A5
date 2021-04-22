@@ -32,6 +32,7 @@ iChar:
         //  characters are in stdin. A word is a sequence of
         //  non-whitespace characters. Whitespace is defined by the
         //  isspace() function. Return 0.
+        //--------------------------------------------------------------
 
         // Must be a multiple of 16
         .equ    MAIN_STACK_BYTECOUNT, 16
@@ -48,9 +49,16 @@ inputLoop:
     str     x0, [x1]
     beq     endInputLoop
 
-    // lCharCount++;
+    // lCharCount++
+    adr     x0, lCharCount
+    ldr     x1, [x0]
+    add     x1, x1, 1
+    str     x1, [x0]
+
     // if (!isspace(iChar)) goto else1; // if 1
+
     // if (!iInWord) goto endif1; // if 2
+
     // lWordCount++;
     // iInWord = FALSE;
     // goto endif1;

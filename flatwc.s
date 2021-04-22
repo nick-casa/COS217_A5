@@ -133,6 +133,8 @@ endInputLoop:
     add     x1, x1, 1
     str     x1, [x0]
 
+    // goto endif
+    b       endif
 endif:
     // printf("%7ld %7ld %7ld\n", lLineCount, lWordCount, lCharCount);
     adr     x0, promptStr

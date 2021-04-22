@@ -109,7 +109,6 @@ endif1:
     adr     x0, iChar
     ldr     w0, [x0]
     adr     x1, newLine
-
     cmp     w0, w1
     bne     endInputLoop
 

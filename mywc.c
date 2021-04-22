@@ -37,15 +37,12 @@ int main(void)
          }
       }
       else{
-         if (! iInWord)
-            iInWord = TRUE;
+         if (! iInWord) iInWord = TRUE;
       }
-      if (iChar == '\n')
-         lLineCount++;
+      if (iChar == '\n') lLineCount++;
    }
 
-   if (iInWord)
-      lWordCount++;
+   if (iInWord) lWordCount++;
 
    printf("%7ld %7ld %7ld\n", lLineCount, lWordCount, lCharCount);
    return 0;

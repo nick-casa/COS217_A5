@@ -5,6 +5,7 @@
 
         .equ    TRUE, 1
         .equ    FALSE, 0
+//----------------------------------------------------------------------
 
 //----------------------------------------------------------------------
         .section .data
@@ -81,25 +82,52 @@ inputLoop:
     str     x1, [x0]
 
     // goto endif1;
-    b endif1
+    b       endif1
 else1:
     // if (iInWord) goto endif1;
+    adr     x0, iInWord
+    ldr     x0, [x0]
+    cmp     x0, TRUE
+    beq     endif1
+
     // iInWord = TRUE;
+    adr     x0, iInWord
+    mov     w1, TRUE
+    str     w1, [x0]
+
     // goto endif1;
+    b       endif1
 endif1:
     // if (iChar != '\n') goto inputLoop;
+    adr     x0, iChar
+    ldr     w0, [x0]
+    mov     w1, '\n'
+    cmp     w0, w1
+    bne     endInputLoop
+
     // lLineCount++;
+    adr     x0, lLineCount
+    ldr     x1, [x0]
+    add     x1, x1, 1
+    str     x1, [x0]
+
     // goto inputLoop;
+    b       inputLoop
 endInputLoop:
     // if (!iInWord) goto endif;
     // lWordCount++;
 endif:
     // printf("%7ld %7ld %7ld\n", lLineCount, lWordCount, lCharCount);
-    // return 0;
+    adr     x0, promptStr
+    adr     x1, lLineCount
+    adr     x2, lWordCount
+    adr     x3, lCharCount
+    bl      printf
 
     // Epilog and return 0
     mov     w0, 0
     ldr     x30, [sp]
     add     sp, sp, MAIN_STACK_BYTECOUNT
+    // return 0;
     ret
     .size   main, (. - main)

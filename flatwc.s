@@ -73,8 +73,8 @@ inputLoop:
 
     // if (!iInWord) goto endif1; // if 2
     adr     x0, iInWord
-    ldr     x0, [x0]
-    cmp     x0, FALSE
+    ldr     w0, [x0]
+    cmp     w0, FALSE
     beq     endif1
 
     // lWordCount++;

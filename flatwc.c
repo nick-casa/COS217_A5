@@ -27,26 +27,25 @@ static int iInWord = FALSE;      /* Bad style. */
 
 int main(void)
 {
-   while ((iChar = getchar()) != EOF){
-      lCharCount++;
 
-      if (isspace(iChar)){
-         if (iInWord){
-            lWordCount++;
-            iInWord = FALSE;
-         }
-      }
-      else{
-         if (! iInWord)
-            iInWord = TRUE;
-      }
-      if (iChar == '\n')
-         lLineCount++;
-   }
+    inputLoop:
+        if((iChar = getchar()) == EOF) goto endInputLoop;
+        lCharCount++;
+            if (!isspace(iChar)) goto else1; // if 1
+                if (!iInWord) goto endif1; // if 2
+                lWordCount++;
+                iInWord = FALSE;
+                goto endif1;
+            else1:
+                if (iInWord) goto endif1;
+                iInWord = TRUE;
+                goto endif1;
+            endif1:
+                if (iChar != '\n') goto inputLoop;
+                lLineCount++;
+        goto inputLoop;
+    endInputLoop:
+        printf("%7ld %7ld %7ld\n", lLineCount, lWordCount, lCharCount);
+        return 0;
 
-   if (iInWord)
-      lWordCount++;
-
-   printf("%7ld %7ld %7ld\n", lLineCount, lWordCount, lCharCount);
-   return 0;
 }

@@ -31,18 +31,18 @@ int main(void)
     inputLoop:
         if((iChar = getchar()) == EOF) goto endInputLoop;
         lCharCount++;
-            if (!isspace(iChar)) goto else1; // if 1
-                if (!iInWord) goto endif1; // if 2
-                lWordCount++;
-                iInWord = FALSE;
-                goto endif1;
-            else1:
-                if (iInWord) goto endif1;
-                iInWord = TRUE;
-                goto endif1;
-            endif1:
-                if (iChar != '\n') goto inputLoop;
-                lLineCount++;
+        if (!isspace(iChar)) goto else1; // if 1
+        if (!iInWord) goto endif1; // if 2
+        lWordCount++;
+        iInWord = FALSE;
+        goto endif1;
+    else1:
+        if (iInWord) goto endif1;
+        iInWord = TRUE;
+        goto endif1;
+    endif1:
+        if (iChar != '\n') goto inputLoop;
+        lLineCount++;
         goto inputLoop;
     endInputLoop:
         if (!iInWord) goto endif;

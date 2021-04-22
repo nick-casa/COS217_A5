@@ -110,7 +110,7 @@ endif1:
     ldr     w0, [x0]
     adr     x1, newLine
     cmp     w0, w1
-    bne     endInputLoop
+    bne     inputLoop
 
     // lLineCount++;
     adr     x0, lLineCount

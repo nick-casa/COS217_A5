@@ -77,7 +77,8 @@ inputLoop:
 
     // iInWord = FALSE;
     adr     x0, iInWord
-    str     FALSE, [x0]
+    ldr     x1, FALSE
+    str     x1, [x0]
 
     // goto endif1;
     b endif1

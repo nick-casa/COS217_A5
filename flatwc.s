@@ -7,6 +7,11 @@
         .equ    FALSE, 0
 //----------------------------------------------------------------------
 
+        .section .rodata
+
+promptString:
+    .string "%7ld %7ld %7ld\n"
+
 //----------------------------------------------------------------------
         .section .data
 
@@ -17,7 +22,7 @@ lWordCount:
 lCharCount:
         .quad   0
 iInWord:
-        .byte   FALSE
+        .word   FALSE
 
 //----------------------------------------------------------------------
         .section .bss
@@ -78,8 +83,8 @@ inputLoop:
 
     // iInWord = FALSE;
     adr     x0, iInWord
-    ldr     x1, FALSE
-    str     x1, [x0]
+    mov     w1, FALSE
+    str     w1, [x0]
 
     // goto endif1;
     b       endif1
@@ -115,7 +120,17 @@ endif1:
     b       inputLoop
 endInputLoop:
     // if (!iInWord) goto endif;
+    adr     x0, iInWord
+    ldr     w0, [x0]
+    cmp     w0, FALSE
+    beq     endif
+
     // lWordCount++;
+    adr     x0, lWordCount
+    ldr     x1, [x0]
+    add     x1, x1, 1
+    str     x1, [x0]
+
 endif:
     // printf("%7ld %7ld %7ld\n", lLineCount, lWordCount, lCharCount);
     adr     x0, promptStr

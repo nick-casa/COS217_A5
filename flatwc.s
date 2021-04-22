@@ -44,9 +44,10 @@ main:
     str     x30, [sp]
 inputLoop:
     // if((iChar = getchar()) == EOF) goto endInputLoop //
-    bl      getchar
+    bl      getchar  // w0 stores the value of getchar
     adr     x1, iChar
-    str     x0, [x1]
+    str     w0, [x1] // iChar = getchar()
+    cmp     w0, -1 // iChar == -1
     beq     endInputLoop
 
     // lCharCount++

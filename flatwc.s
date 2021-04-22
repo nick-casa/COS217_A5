@@ -22,7 +22,7 @@ iInWord:
         .section .bss
 
 iChar:
-        .skip   8
+        .skip   4
 
 //----------------------------------------------------------------------
         .section .text
@@ -45,7 +45,7 @@ inputLoop:
     // if((iChar = getchar()) == EOF) goto endInputLoop //
     bl      getchar
     adr     x1, iChar
-    cmp
+    str     x0, [x1]
     beq     endInputLoop
 
     // lCharCount++;

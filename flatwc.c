@@ -45,7 +45,9 @@ int main(void)
                 lLineCount++;
         goto inputLoop;
     endInputLoop:
+        if (!iInWord) goto endif;
+        lWordCount++;
+    endif:
         printf("%7ld %7ld %7ld\n", lLineCount, lWordCount, lCharCount);
         return 0;
-
 }

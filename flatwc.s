@@ -9,8 +9,6 @@
 
         .section .rodata
 
-newLine:
-    .string "\n"
 
 promptStr:
     .string "%7ld %7ld %7ld\n"
@@ -109,7 +107,7 @@ endif1:
     // if (iChar != '\n') goto inputLoop;
     adr     x0, iChar
     ldr     w0, [x0]
-    mov     w1, newLine
+    mov     w1, 10
     cmp     w0, w1
     bne     endInputLoop
 

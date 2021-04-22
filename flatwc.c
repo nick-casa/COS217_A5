@@ -27,7 +27,6 @@ static int iInWord = FALSE;      /* Bad style. */
 
 int main(void)
 {
-
     inputLoop:
         if((iChar = getchar()) == EOF) goto endInputLoop;
         lCharCount++;

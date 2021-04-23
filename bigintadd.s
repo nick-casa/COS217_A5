@@ -71,7 +71,7 @@ endif1:
 // distinct from oAddend1 and oAddend2.  Return 0 (FALSE) if an
 // overflow occurred, and 1 (TRUE) otherwise.
 
-// Must be a multiple of 16
+        // Must be a multiple of 16
         .equ    ADD_STACK_BYTECOUNT, 64
 
         // Local variables stack offsets:
@@ -95,7 +95,7 @@ BigInt_add:
     str     x30, [sp]
     str     x0, [sp, OADDEND1]
     str     x1, [sp, OADDEND2]
-    str     x3, [sp, OSUM]
+    str     x2, [sp, OSUM]
 
     // unsigned long ulCarry;
     // unsigned long ulSum;
@@ -229,7 +229,7 @@ endif6:
     ldr     x1, [sp, OSUM]
     add     x1, x1, 8
     ldr     x2, [sp, LSUMLENGTH]
-    str     x0, [x1, x2, lsl 3]
+    str     x0, [x1, x2, xlsl 3]
 
     // lSumLength++;
     ldr     x0, [sp, LSUMLENGTH]

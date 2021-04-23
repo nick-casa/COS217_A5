@@ -62,7 +62,7 @@ endif1:
      add     sp, sp, LARGER_STACK_BYTECOUNT
      ret
 
-     .size   BigInt_Larger, (. - BigInt_Larger)
+     .size   BigInt_larger, (. - BigInt_larger)
 
 
 //--------------------------------------------------------------------//
@@ -86,6 +86,7 @@ endif1:
         .equ    OADDEND1, 56
 
         .equ    MAX_DIGITS, 32768
+        .equ    SIZEOF_UNSIGNEDLONG, 8
         .global BigInt_add
 
 BigInt_add:

@@ -87,7 +87,6 @@ endif1:
 
         .equ    MAX_DIGITS, 32768
 
-        .global main
 
 BigInt_add:
  // Prolog
@@ -243,4 +242,8 @@ endif5:
     str     x1, [x0]
 
     // return TRUE;
-    ret     TRUE
+    mov     w0, 0
+    ldr     x30, [sp]
+    add     sp, sp, ADD_STACK_BYTECOUNT
+    ret     1
+    .size   BigInt_add, (. - BigInt_add)

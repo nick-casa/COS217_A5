@@ -127,7 +127,7 @@ BigInt_add:
     //////////////////
     mov     x1, 0
     mov     x2, MAX_DIGITS
-    mov     x3, SIZE_UNSIGNEDLONG
+    mov     x3, SIZEOF_UNSIGNEDLONG
     mul     x2, x2, x3
     bl      memset
 

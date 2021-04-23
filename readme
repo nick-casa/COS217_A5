@@ -113,9 +113,9 @@ mywcXXX.txt: Description of the characteristics of that file, and how it stress 
 What are the CPU times consumed by the programs from Parts 2a, 2b, 2d,
 2e, and 2f to compute fib(250000) on armlab? Fill in the blanks.
 
-Part 2a:  _____ seconds
+Part 2a:  12.010000 seconds
 
-Part 2b:  _____ seconds
+Part 2b:  2.990000 seconds
 
 Part 2d:  _____ seconds
 

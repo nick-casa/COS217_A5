@@ -18,7 +18,7 @@ enum {FALSE, TRUE};
 static long BigInt_larger(long lLength1, long lLength2)
 {
     long lLarger;
-    if (lLength1 <= lLength2) go to else1:
+    if (lLength1 <= lLength2) goto else1;
         lLarger = lLength1;
     goto endif1;
     else1:

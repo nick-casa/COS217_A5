@@ -229,7 +229,7 @@ endif6:
     ldr     x1, [sp, OSUM]
     add     x1, x1, 8
     ldr     x2, [sp, LSUMLENGTH]
-    str     x0, [x1, x2, xlsl 3]
+    str     x0, [x1, x2, lsl 3]
 
     // lSumLength++;
     ldr     x0, [sp, LSUMLENGTH]

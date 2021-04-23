@@ -126,7 +126,8 @@ BigInt_add:
     //////////////////
     mov     x1, 0
     mov     x2, MAX_DIGITS
-    mul     x2, x2, SIZE_UNSIGNEDLONG
+    mov     x3, SIZE_UNSIGNEDLONG
+    mul     x2, x2, x3
     bl      memset
 
 endif2:
@@ -217,7 +218,8 @@ endLoop:
     bne     endif6
 
     // return FALSE;
-    ret     0
+    mov     x0, FALSE
+    ret     x0
 
 endif6:
     // oSum->aulDigits[lSumLength] = 1;
@@ -245,5 +247,6 @@ endif5:
     mov     w0, 0
     ldr     x30, [sp]
     add     sp, sp, ADD_STACK_BYTECOUNT
-    ret     1
+    mov     x1, 1
+    ret     x1
     .size   BigInt_add, (. - BigInt_add)

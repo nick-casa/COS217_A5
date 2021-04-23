@@ -20,5 +20,5 @@ int main(void){
             if (count <= 1000) fprintf(stdout, "%c", random);
         }
     }
-
+    return 0;
 }

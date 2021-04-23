@@ -59,7 +59,7 @@ endif1:
      // Epilog and return LLARGER
      ldr     x0, [sp, LLARGER]
      ldr     x30, [sp]
-     add     sp, sp, GCD_STACK_BYTECOUNT
+     add     sp, sp, LARGER_STACK_BYTECOUNT
      ret
 
      .size   BigInt_Larger, (. - BigInt_Larger)
@@ -86,7 +86,6 @@ endif1:
         .equ    OADDEND1, 56
 
         .equ    MAX_DIGITS, 32768
-        .equ    SIZE_UNSIGNEDLONG, 8
 
         .global main
 
@@ -219,7 +218,7 @@ endLoop:
     bne     endif6
 
     // return FALSE;
-    ret     FALSE
+    ret     0
 
 endif6:
     // oSum->aulDigits[lSumLength] = 1;

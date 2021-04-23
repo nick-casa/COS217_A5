@@ -96,7 +96,7 @@ Statement tests:
 
 mywcXXX.txt: Description of the characteristics of that file, and which lines of the mywc.c and mywc.s programs it causes the computer to execute.
 mywc200.txt: Executes all lines of mywc.c.
-Starts with a space to enter the loop, next character (not a space) tests the else conditional
+// Starts with a space to enter the loop, next character (not a space) tests the else conditional
 
 "This file contains such-and-such characteristics, and so causes the
 computer to execute lines x, y, ..., and z of the given mywc.c"

@@ -82,6 +82,32 @@ particular, what bugs are in your submission?
 What is your mywc program test plan?
 
 
+Boundary tests:
+
+mywcXXX.txt: Description of the characteristics of that file, and how it tests boundary conditions of the mywc.c and mywc.s programs.
+mywc100.txt: Empty file, tests if there are 0 new lines, words and characters
+mywc101.txt: One space character
+mywc102.txt: One new line
+mywc103.txt: One character
+mywc104.txt: One character on second line
+mywc105.txt: New line, space, character, space, new line
+
+Statement tests:
+
+mywcXXX.txt: Description of the characteristics of that file, and which lines of the mywc.c and mywc.s programs it causes the computer to execute.
+mywc200.txt: Executes all lines of mywc.c.
+Starts with a space to enter the loop, next character (not a space) tests the else conditional
+
+"This file contains such-and-such characteristics, and so causes the
+computer to execute lines x, y, ..., and z of the given mywc.c"
+(where x, y, ..., and z are line numbers). Collectively your statement
+test files should cause the computer to execute all lines of the given
+mywc.c file (and so, by assumption, all lines of your mywc.s file).
+
+Stress tests:
+
+mywcXXX.txt: Description of the characteristics of that file, and how it stress tests the mywc.c and mywc.s programs.
+
 
 ------------------------------------------------------------------------
 What are the CPU times consumed by the programs from Parts 2a, 2b, 2d,

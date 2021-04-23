@@ -123,7 +123,7 @@ BigInt_add:
     // CHECK HERE
     ldr     x0, [sp, OSUM]
     add     x0, x0, 8
-    ldr     x0, [x0]
+    // ldr     x0, [x0]
     //////////////////
     mov     x1, 0
     mov     x2, MAX_DIGITS

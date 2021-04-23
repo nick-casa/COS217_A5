@@ -240,6 +240,7 @@ endif5:
     // Set the length of the sum.
     // oSum->lLength = lSumLength;
     ldr     x1, [sp, LSUMLENGTH]
+    ldr     x0, [sp, OSUM]
     str     x1, [x0]
 
     // return TRUE;

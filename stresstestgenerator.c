@@ -12,7 +12,7 @@ int main(void){
     unsigned int random;
     int i;
     int count = 0;
-    srand(rand());
+    srand(time(0));
     for (i = 0; i < CHAR_COUNT; i++ ) {
         random = rand();
         random %= 0x7F;

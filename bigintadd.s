@@ -86,7 +86,7 @@ endif1:
         .equ    OADDEND1, 56
 
         .equ    MAX_DIGITS, 32768
-
+        .global BigInt_add
 
 BigInt_add:
  // Prolog

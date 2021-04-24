@@ -244,9 +244,8 @@ endif5:
     str     x1, [x0]
 
     // return TRUE;
-    mov     w0, 0
+    mov     w0, 1
     ldr     x30, [sp]
     add     sp, sp, ADD_STACK_BYTECOUNT
-    mov     x1, 1
-    ret     x1
+    ret
     .size   BigInt_add, (. - BigInt_add)

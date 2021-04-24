@@ -49,7 +49,7 @@ BigInt_larger:
     str     x0, [sp, LLARGER]
 
     // goto endif1;
-    bl      endif1
+    b      endif1
 
 else1:
     // lLarger = lLength2;

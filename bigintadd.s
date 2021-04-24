@@ -241,7 +241,7 @@ endif5:
     str     x1, [x0]
 
     // return TRUE;
-    mov     w0, 1
+    mov     x0, TRUE
     ldr     x30, [sp]
     add     sp, sp, ADD_STACK_BYTECOUNT
     ret

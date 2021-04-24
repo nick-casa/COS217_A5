@@ -217,6 +217,8 @@ endLoop:
 
     // return FALSE;
     mov     x0, FALSE
+    ldr     x30, [sp]
+    add     sp, sp, ADD_STACK_BYTECOUNT
     ret
 
 endif6:

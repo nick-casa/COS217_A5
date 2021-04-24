@@ -217,7 +217,7 @@ endLoop:
 
     // return FALSE;
     mov     x0, FALSE
-    ret     x0
+    ret
 
 endif6:
     // oSum->aulDigits[lSumLength] = 1;

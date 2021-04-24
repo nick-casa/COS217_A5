@@ -204,7 +204,7 @@ endif4:
     str     x0, [sp, LINDEX]
 
     // goto loop1;
-    bl loop1
+    b loop1
 
 endLoop:
     // Check for a carry out of the last "column" of the addition.

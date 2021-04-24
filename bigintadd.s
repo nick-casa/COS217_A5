@@ -2,20 +2,17 @@
 // bigintadd.s
 // Author: Alina Chen & Nickolas Casalinuovo
 //----------------------------------------------------------------------
-
         .equ    TRUE, 1
         .equ    FALSE, 0
-//----------------------------------------------------------------------
 
+//----------------------------------------------------------------------
         .section .rodata
 
 //----------------------------------------------------------------------
         .section .data
 
-
 //----------------------------------------------------------------------
         .section .bss
-
 
 //----------------------------------------------------------------------
         .section .text
@@ -33,11 +30,11 @@
 BigInt_larger:
     // Prolog
     sub     sp, sp, LARGER_STACK_BYTECOUNT
-    // long lLarger
     str     x30, [sp]
     str     x0, [sp, LLENGTH1]
     str     x1, [sp, LLENGTH2]
 
+    // long lLarger
 
     // if (lLength1 <= lLength2) goto else1;
     ldr     x0, [sp, LLENGTH1]
@@ -64,7 +61,6 @@ endif1:
 
      .size   BigInt_larger, (. - BigInt_larger)
 
-
 //--------------------------------------------------------------------//
 
 // Assign the sum of oAddend1 and oAddend2 to oSum.  oSum should be
@@ -87,6 +83,7 @@ endif1:
 
         .equ    MAX_DIGITS, 32768
         .equ    SIZE_UNSIGNEDLONG, 8
+
         .global BigInt_add
 
 BigInt_add:

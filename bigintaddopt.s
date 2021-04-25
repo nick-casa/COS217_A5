@@ -154,7 +154,7 @@ BigInt_add:
     mov     x2, MAX_DIGITS
     mov     x3, SIZE_UNSIGNEDLONG
     mul     x2, x2, x3
-    b      memset
+    bl      memset
 
 endif2:
     // Perform the addition.

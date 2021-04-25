@@ -105,7 +105,7 @@ BigInt_add:
     ldr     x0, [x0]
     ldr     x1, [sp, OADDEND2]
     ldr     x1, [x1]
-    b       BigInt_larger
+    bl       BigInt_larger
     str     x0, [sp, LSUMLENGTH]
 
     // Clear oSum's array if necessary.

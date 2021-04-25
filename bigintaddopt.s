@@ -211,16 +211,16 @@ loop1:
 endif3:
     /////////////////////////////  ulSum += oAddend2->aulDigits[lIndex];
     /////////////////////////////  ldr     x0, [sp, ULSUM]
-    // mov     x0, ULSUM
+    ///////////////////////////// mov     x0, ULSUM
     /////////////////////////////  ldr     x1, [sp, OADDEND2]
     /////////////////////////////  mov     x1, OADDEND2
     add     x1, OADDEND2, 8    //  gets to aulDigits
-    /////////////////////////////  ldr     x2, [sp, LINDEX]     // loads lIndex into x2
-    // mov     x2, LINDEX
+    /////////////////////////////  ldr     x2, [sp, LINDEX]  // loads lIndex into x2
+    ///////////////////////////// mov     x2, LINDEX
     ldr     x1, [x1, LINDEX, lsl 3]
-    add     x0, ULSUM, x1
+    add     ULSUM, ULSUM, x1
     /////////////////////////////  str     x0, [sp, ULSUM]
-    mov     ULSUM, x0
+    /////////////////////////////  mov     ULSUM, x0
 
     // if (ulSum >= oAddend2->aulDigits[lIndex]) goto endif4; /* Check for overflow. */
     cmp     ULSUM, x1

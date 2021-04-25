@@ -51,7 +51,7 @@ int BigInt_add(BigInt_T oAddend1, BigInt_T oAddend2, BigInt_T oSum)
     /* Perform the addition. */
     ulCarry = 0;
     lIndex = 0;
-    //
+
     if(lIndex >= lSumLength) goto endLoop;
     loop1:
         ulSum = ulCarry;

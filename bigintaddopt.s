@@ -151,7 +151,8 @@ BigInt_add:
     ///////////////////////////////////////// mov     x0, OSUM
     add     x0, OSUM, 8
     mov     x1, 0
-    mul     x2, MAX_DIGITS, SIZE_UNSIGNEDLONG
+    mov     x2, MAX_DIGITS
+    mul     x2, x2, SIZE_UNSIGNEDLONG
     ///////////////////////////////////////// mov     x2, MAX_DIGITS
     ///////////////////////////////////////// mov     x3, SIZE_UNSIGNEDLONG
     ///////////////////////////////////////// mul     x2, x2, x3

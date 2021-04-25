@@ -43,8 +43,6 @@ BigInt_larger:
     // long lLarger
 
     // if (lLength1 <= lLength2) goto else1;
-    // mov     x0, LLENGTH1 //unnecessary
-    // mov     x1, LLENGTH2 //unnecessary
     cmp     x0, x1
     ble     else1
 
@@ -59,7 +57,6 @@ else1:
     mov     LLARGER, LLENGTH2
 endif1:
      // Epilog and return LLARGER
-     //ldr     x0, [sp, LLARGER]//
      mov     x0, LLARGER
      ldr     x30, [sp]
      ldr     x19, [sp, 8]
@@ -80,19 +77,12 @@ endif1:
         .equ    ADD_STACK_BYTECOUNT, 64
 
         // Local variables stack offsets:
-        // .equ    LSUMLENGTH, 8
-        // .equ    LINDEX, 16
-        // .equ    ULSUM, 24
-        // .equ    ULCARRY, 32
         LSUMLENGTH  .req x25
         LINDEX      .req x24
         ULSUM       .req x23
         ULCARRY     .req x22
 
         // Parameter stack offsets:
-        // .equ    OSUM, 40
-        // .equ    OADDEND2, 48
-        // .equ    OADDEND1, 56
         OSUM        .req x21
         OADDEND2    .req x20 //callee-saved
         OADDEND1    .req x19
@@ -126,29 +116,19 @@ BigInt_add:
 
     // Determine the larger length.
     // lSumLength = BigInt_larger(oAddend1->lLength, oAddend2->lLength);
-    // ldr     x0, [sp, OADDEND1]
     ldr     x0, [x0]
-    // ldr     x1, [sp, OADDEND2]
     ldr     x1, [x1]
     bl       BigInt_larger
 
-    // str     x0, [sp, LSUMLENGTH]
     mov     LSUMLENGTH, x0
 
     // Clear oSum's array if necessary.
     // if (oSum->lLength <= lSumLength) goto endif2;
-    ///////////////////////////////////////// ldr     x0, [sp, OSUM]
-    ///////////////////////////////////////// mov     x2, OSUM  unnecessary
     ldr     x2, [OSUM]
-    ///////////////////////////////////////// ldr     x1, [sp, LSUMLENGTH]
-    ///////////////////////////////////////// mov     x0, LSUMLENGTH
     cmp     x2, LSUMLENGTH
     ble     endif2
 
     //  memset(oSum->aulDigits, 0, MAX_DIGITS * sizeof(unsigned long));
-    ///////////////////////////////////////// CHECK HERE
-    ///////////////////////////////////////// ldr     x0, [sp, OSUM]
-    ///////////////////////////////////////// mov     x0, OSUM
     add     x0, OSUM, 8
     mov     x1, 0
     mov     x2, MAX_DIGITS
@@ -159,106 +139,65 @@ BigInt_add:
 endif2:
     // Perform the addition.
     // ulCarry = 0;
-    /////////////////////////// mov     x0, 0
-    /////////////////////////// str     x0, [sp, ULCARRY]
     mov     ULCARRY, 0
-    // lIndex = 0;
-    /////////////////////////// str     x0, [sp, LINDEX]
     mov     LINDEX, 0
 
 loop1:
     // if(lIndex >= lSumLength) goto endLoop;
-    ///////////////////////////////// ldr     x0, [sp, LINDEX]
-    ///////////////////////////////// ldr     x1, [sp, LSUMLENGTH]
     cmp     LINDEX, LSUMLENGTH
     bge     endLoop
 
     // ulSum = ulCarry;
-    /////////////////////////////// ldr     x0, [sp, ULCARRY]
-    /////////////////////////////// str     x0, [sp, ULSUM]
     mov     ULSUM, ULCARRY
 
 
     // ulCarry = 0;
-    /////////////////////////////// str     x0, [sp, ULCARRY]
     mov     ULCARRY, 0
 
     // ulSum += oAddend1->aulDigits[lIndex]
-    /////////////////////////////// ldr     x0, [sp, ULSUM]
-    /////////////////////////////// mov     x0, ULSUM
-    /////////////////////////////// ldr     x1, [sp, OADDEND1]
-    /////////////////////////////// mov     x1, OADDEND1
     add     x1, OADDEND1, 8            // gets to aulDigits
-    /////////////////////////////// ldr     x2, [sp, LINDEX]     // loads lIndex into x2
-    /////////////////////////////// mov     x2, LINDEX
     ldr     x1, [x1, LINDEX, lsl 3]
     add     ULSUM, ULSUM, x1
-    ///////////////////////////////  str     x0, [sp, ULSUM]
-    /////////////////////////////// mov     ULSUM, x0
 
     // if (ulSum >= oAddend1->aulDigits[lIndex])  goto endif3;
     cmp     ULSUM, x1
     bhs     endif3
 
     // ulCarry = 1;
-    //////////////////////////////// mov     x0, 1
-    //////////////////////////////// str     x0, [sp, ULCARRY]
     mov     ULCARRY, 1
 
 endif3:
     //  ulSum += oAddend2->aulDigits[lIndex];
-    /////////////////////////////  ldr     x0, [sp, ULSUM]
-    ///////////////////////////// mov     x0, ULSUM
-    /////////////////////////////  ldr     x1, [sp, OADDEND2]
-    /////////////////////////////  mov     x1, OADDEND2
     add     x1, OADDEND2, 8    //  gets to aulDigits
-    /////////////////////////////  ldr     x2, [sp, LINDEX]  // loads lIndex into x2
-    ///////////////////////////// mov     x2, LINDEX
     ldr     x1, [x1, LINDEX, lsl 3]
     add     ULSUM, ULSUM, x1
-    /////////////////////////////  str     x0, [sp, ULSUM]
-    /////////////////////////////  mov     ULSUM, x0
 
     // if (ulSum >= oAddend2->aulDigits[lIndex]) goto endif4; /* Check for overflow. */
     cmp     ULSUM, x1
     bhs     endif4
 
     // ulCarry = 1;
-    // mov     x0, 1
-    // str     x0, [sp, ULCARRY]
     mov     ULCARRY, 1
 
 endif4:
     // oSum->aulDigits[lIndex] = ulSum;
-    //////////////////////////////////// check this
-    ////////////////////////////////////  ldr     x0, [sp, ULSUM]
     mov     x0, ULSUM
-    ////////////////////////////////////  ldr     x1, [sp, OSUM]
-    ////////////////////////////////////  mov     x1, OSUM
     add     x1, OSUM, 8
-    ////////////////////////////////////  ldr     x2, [sp, LINDEX]
-    ////////////////////////////////////  mov     x2, LINDEX
     str     x0, [x1, LINDEX, lsl 3]
 
     // lIndex++;
-    //////////////////////////////////// ldr     x0, [sp, LINDEX]
-    //////////////////////////////////// add     x0, x0, 1
-    //////////////////////////////////// str     x0, [sp, LINDEX]
     add     LINDEX, LINDEX, 1
 
     // goto loop1;
     b       loop1
 
 endLoop:
-    ///////////////////////////////// Check for a carry out of the last "column" of the addition.
+    // Check for a carry out of the last "column" of the addition.
     // if (ulCarry != 1) goto endif5;
-    ///////////////////////////////// ldr     x0, [sp, ULCARRY]
-    ///////////////////////////////// wcmp     x0, 1
     cmp     ULCARRY, 1
     bne     endif5
 
     // if (lSumLength != MAX_DIGITS) goto endif6;
-    ///////////////////////////////// ldr     x0, [sp, LSUMLENGTH]
     cmp     LSUMLENGTH, MAX_DIGITS
     bne     endif6
 
@@ -277,12 +216,8 @@ endLoop:
 
 endif6:
     // oSum->aulDigits[lSumLength] = 1;
-    ///////////////////////////////// check this
     mov     x0, 1
-    /////////////////////////////////  ldr     x1, [sp, OSUM]
-    /////////////////////////////////  mov     x1, OSUM
     add     x1, OSUM, 8
-    /////////////////////////////////  ldr     x2, [sp, LSUMLENGTH]
     mov     x2, LSUMLENGTH
     str     x0, [x1, x2, lsl 3]
 
@@ -301,7 +236,6 @@ endif5:
     ////////////////////////  str     x1, [x0]
     ////////////////////////  CHECK THIS
     str     LSUMLENGTH, [OSUM]
-
 
     // return TRUE;
     mov     x0, TRUE

@@ -301,6 +301,7 @@ endif5:
     //ldr     x1, [sp, LSUMLENGTH]
     //ldr     x0, [sp, OSUM]
     //str     x1, [x0]
+
     //CHECK THIS
     mov     OSUM, LSUMLENGTH
 

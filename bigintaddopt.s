@@ -300,9 +300,8 @@ endif5:
     ////////////////////////  ldr     x0, [sp, OSUM]
     ////////////////////////  str     x1, [x0]
     ////////////////////////  CHECK THIS
-    ////////////////////////  mov     x0, OSUM
-    ////////////////////////  ldr     x0, [x0]
-    mov     OSUM, LSUMLENGTH
+    str     LSUMLENGTH, [OSUM]
+
 
     // return TRUE;
     mov     x0, TRUE

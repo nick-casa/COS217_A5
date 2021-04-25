@@ -222,19 +222,11 @@ endif6:
     str     x0, [x1, x2, lsl 3]
 
 
-    ///////////////////////////////// lSumLength++;
-    ///////////////////////////////// ldr     x0, [sp, LSUMLENGTH]
-    ///////////////////////////////// add     x0, x0, 1
-    ///////////////////////////////// str     x0, [sp, LSUMLENGTH]
+    // lSumLength++;
     add     LSUMLENGTH,LSUMLENGTH,1
 
 endif5:
     // oSum->lLength = lSumLength;
-    ////////////////////////   Set the length of the sum.
-    ////////////////////////  ldr     x1, [sp, LSUMLENGTH]
-    ////////////////////////  ldr     x0, [sp, OSUM]
-    ////////////////////////  str     x1, [x0]
-    ////////////////////////  CHECK THIS
     str     LSUMLENGTH, [OSUM]
 
     // return TRUE;

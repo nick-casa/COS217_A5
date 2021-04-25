@@ -209,7 +209,7 @@ loop1:
     mov     ULCARRY, 1
 
 endif3:
-    /////////////////////////////  ulSum += oAddend2->aulDigits[lIndex];
+    //  ulSum += oAddend2->aulDigits[lIndex];
     /////////////////////////////  ldr     x0, [sp, ULSUM]
     ///////////////////////////// mov     x0, ULSUM
     /////////////////////////////  ldr     x1, [sp, OADDEND2]

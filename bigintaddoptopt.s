@@ -121,6 +121,7 @@ loop1:
     // ulCarry = 1;
     mov     ULCARRY, 1
 
+
 endif3:
     //  ulSum += oAddend2->aulDigits[lIndex];
     add     x1, OADDEND2, 8    //  gets to aulDigits
@@ -146,6 +147,7 @@ endif4:
     // if(lIndex < lSumLength) goto loop1;
     cmp     LINDEX, LSUMLENGTH
     blt     loop1
+
 
 endLoop:
     // Check for a carry out of the last "column" of the addition.

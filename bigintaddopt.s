@@ -137,55 +137,53 @@ BigInt_add:
 
     // Clear oSum's array if necessary.
     // if (oSum->lLength <= lSumLength) goto endif2;
-    // ldr     x0, [sp, OSUM]
-    // mov     x2, OSUM  unnecessary
-    ldr     x2, [x2]
-    // ldr     x1, [sp, LSUMLENGTH]
-    // mov     x0, LSUMLENGTH
+    ///////////////////////////////////////// ldr     x0, [sp, OSUM]
+    ///////////////////////////////////////// mov     x2, OSUM  unnecessary
+    ldr     x2, [OSUM]
+    ///////////////////////////////////////// ldr     x1, [sp, LSUMLENGTH]
+    ///////////////////////////////////////// mov     x0, LSUMLENGTH
     cmp     x2, LSUMLENGTH
     ble     endif2
 
-    // memset(oSum->aulDigits, 0, MAX_DIGITS * sizeof(unsigned long));
-    // CHECK HERE
-    // ldr     x0, [sp, OSUM]
-    mov     x0, OSUM
-    add     x0, x0, 8
-    // ldr     x0, [x0]
-    //////////////////
+    //  memset(oSum->aulDigits, 0, MAX_DIGITS * sizeof(unsigned long));
+    ///////////////////////////////////////// CHECK HERE
+    ///////////////////////////////////////// ldr     x0, [sp, OSUM]
+    ///////////////////////////////////////// mov     x0, OSUM
+    add     x0, OSUM, 8
     mov     x1, 0
-    mov     x2, MAX_DIGITS
-    mov     x3, SIZE_UNSIGNEDLONG
-    mul     x2, x2, x3
+    mul     x2, MAX_DIGITS, SIZE_UNSIGNEDLONG
+    ///////////////////////////////////////// mov     x2, MAX_DIGITS
+    ///////////////////////////////////////// mov     x3, SIZE_UNSIGNEDLONG
+    ///////////////////////////////////////// mul     x2, x2, x3
     bl      memset
 
 endif2:
     // Perform the addition.
     // ulCarry = 0;
-    // mov     x0, 0
-    // str     x0, [sp, ULCARRY]
+    /////////////////////////// mov     x0, 0
+    /////////////////////////// str     x0, [sp, ULCARRY]
     mov     ULCARRY, 0
     // lIndex = 0;
-    // str     x0, [sp, LINDEX]
+    /////////////////////////// str     x0, [sp, LINDEX]
     mov     LINDEX, 0
 
 loop1:
     // if(lIndex >= lSumLength) goto endLoop;
-    //ldr     x0, [sp, LINDEX]
-    //ldr     x1, [sp, LSUMLENGTH]
+    ///////////////////////////////// ldr     x0, [sp, LINDEX]
+    ///////////////////////////////// ldr     x1, [sp, LSUMLENGTH]
     cmp     LINDEX, LSUMLENGTH
     bge     endLoop
 
     // ulSum = ulCarry;
-    // ldr     x0, [sp, ULCARRY]
-    // str     x0, [sp, ULSUM]
+    /////////////////////////////// ldr     x0, [sp, ULCARRY]
+    /////////////////////////////// str     x0, [sp, ULSUM]
     mov     ULSUM, ULCARRY
 
 
     // ulCarry = 0;
+    /////////////////////////////// str     x0, [sp, ULCARRY]
     mov     ULCARRY, 0
-    //str     x0, [sp, ULCARRY]
 
-//MACKLEMORE EFFICIENT LATER!
     // ulSum += oAddend1->aulDigits[lIndex]
     /////////////////////////////// ldr     x0, [sp, ULSUM]
     /////////////////////////////// mov     x0, ULSUM
@@ -204,8 +202,8 @@ loop1:
     bhs     endif3
 
     // ulCarry = 1;
-    // mov     x0, 1
-    // str     x0, [sp, ULCARRY]
+    //////////////////////////////// mov     x0, 1
+    //////////////////////////////// str     x0, [sp, ULCARRY]
     mov     ULCARRY, 1
 
 endif3:

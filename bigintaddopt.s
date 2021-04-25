@@ -209,21 +209,21 @@ loop1:
     mov     ULCARRY, 1
 
 endif3:
-    // ulSum += oAddend2->aulDigits[lIndex];
-    // ldr     x0, [sp, ULSUM
-    mov     x0, ULSUM
-    // ldr     x1, [sp, OADDEND2]
-    mov     x1, OADDEND2
-    add     x1, x1, 8            // gets to aulDigits
-    // ldr     x2, [sp, LINDEX]     // loads lIndex into x2
-    mov     x2, LINDEX
-    ldr     x1, [x1, x2, lsl 3]
-    add     x0, x0, x1
-    //str     x0, [sp, ULSUM]
+    /////////////////////////////  ulSum += oAddend2->aulDigits[lIndex];
+    /////////////////////////////  ldr     x0, [sp, ULSUM]
+    // mov     x0, ULSUM
+    /////////////////////////////  ldr     x1, [sp, OADDEND2]
+    /////////////////////////////  mov     x1, OADDEND2
+    add     x1, OADDEND2, 8    //  gets to aulDigits
+    /////////////////////////////  ldr     x2, [sp, LINDEX]     // loads lIndex into x2
+    // mov     x2, LINDEX
+    ldr     x1, [x1, LINDEX, lsl 3]
+    add     x0, ULSUM, x1
+    /////////////////////////////  str     x0, [sp, ULSUM]
     mov     ULSUM, x0
 
     // if (ulSum >= oAddend2->aulDigits[lIndex]) goto endif4; /* Check for overflow. */
-    cmp     x0, x1
+    cmp     ULSUM, x1
     bhs     endif4
 
     // ulCarry = 1;
@@ -237,8 +237,8 @@ endif4:
     // ldr     x0, [sp, ULSUM]
     mov     x0, ULSUM
     // ldr     x1, [sp, OSUM]
-    mov     x1, OSUM
-    add     x1, x1, 8
+    // mov     x1, OSUM
+    add     x1, OSUM, 8
     // ldr     x2, [sp, LINDEX]
     mov     x2, LINDEX
     str     x0, [x1, x2, lsl 3]

@@ -127,11 +127,14 @@ BigInt_add:
     // Determine the larger length.
     // lSumLength = BigInt_larger(oAddend1->lLength, oAddend2->lLength);
     // ldr     x0, [sp, OADDEND1]
-    ldr     x0, [x0]
+    // ldr     x0, [x0]
     // ldr     x1, [sp, OADDEND2]
-    ldr     x1, [x1]
+    // ldr     x1, [x1]
+    mov     x0, OADDEND1
+    ldr     x0, [x0]
+    mov     x1, OADDEND2
+    ldr     x1, [x0]
     bl       BigInt_larger
-
     // str     x0, [sp, LSUMLENGTH]
     mov     LSUMLENGTH, x0
 

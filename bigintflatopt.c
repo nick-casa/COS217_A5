@@ -46,7 +46,7 @@ int BigInt_add(BigInt_T oAddend1, BigInt_T oAddend2, BigInt_T oSum)
         lSumLength = lLength2;
 
     /* Determine the larger length. */
-    //lSumLength = BigInt_larger(oAddend1->lLength, oAddend2->lLength);
+    /* lSumLength = BigInt_larger(oAddend1->lLength, oAddend2->lLength); */
 
     /* Clear oSum's array if necessary. */
     if (oSum->lLength <= lSumLength) goto endif2;

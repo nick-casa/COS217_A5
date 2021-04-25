@@ -7,61 +7,9 @@
 //----------------------------------------------------------------------
         .section .text
 
-        // Must be a multiple of 16
-        .equ    LARGER_STACK_BYTECOUNT, 32
-
-        // Local variable stack offsets:
-        LLARGER     .req x21 //callee-saved
-
-        // Parameter stack offsets:
-        LLENGTH2    .req x20 //callee-saved
-        LLENGTH1    .req x19
-
-BigInt_larger:
-    // Prolog
-    sub     sp, sp, LARGER_STACK_BYTECOUNT
-    str     x30, [sp]
-    str     x19, [sp, 8]
-    str     x20, [sp, 16]
-    str     x21, [sp, 24]
-
-    // store parameters in registers
-    mov     LLENGTH1, x0
-    mov     LLENGTH2, x1
-
-    // long lLarger
-
-    // if (lLength1 <= lLength2) goto else1;
-    cmp     x0, x1
-    ble     else1
-
-    // lLarger = lLength1;
-    mov     LLARGER, LLENGTH1
-
-    // goto endif1;
-    b      endif1
-
-else1:
-    // lLarger = lLength2;
-    mov     LLARGER, LLENGTH2
-
-endif1:
-     // Epilog and return LLARGER
-     mov     x0, LLARGER
-     ldr     x30, [sp]
-     ldr     x19, [sp, 8]
-     ldr     x20, [sp, 16]
-     ldr     x21, [sp, 24]
-     add     sp, sp, LARGER_STACK_BYTECOUNT
-     ret
-
-     .size   BigInt_larger, (. - BigInt_larger)
-
-//--------------------------------------------------------------------//
-
-// Assign the sum of oAddend1 and oAddend2 to oSum.  oSum should be
-// distinct from oAddend1 and oAddend2.  Return 0 (FALSE) if an
-// overflow occurred, and 1 (TRUE) otherwise.
+        // Assign the sum of oAddend1 and oAddend2 to oSum.  oSum should be
+        // distinct from oAddend1 and oAddend2.  Return 0 (FALSE) if an
+        // overflow occurred, and 1 (TRUE) otherwise.
 
         // Must be a multiple of 16
         .equ    ADD_STACK_BYTECOUNT, 64
@@ -104,12 +52,30 @@ BigInt_add:
     // long lIndex;
     // long lSumLength;
 
-    // Determine the larger length.
-    // lSumLength = BigInt_larger(oAddend1->lLength, oAddend2->lLength);
+    // if (oAddend1->lLength <= oAddend2->lLength) goto else1;
     ldr     x0, [x0]
     ldr     x1, [x1]
-    bl       BigInt_larger
+    cmp     x0, x1
+    ble     else1
+
+    // lSumLength = oAddend1->lLength;
     mov     LSUMLENGTH, x0
+
+    // goto endif1;
+    b       endif1
+
+else1:
+    // lSumLength = oAddend2->lLength
+    mov     LSUMLENGTH, x1
+
+endif1:
+
+    // Determine the larger length.
+    // lSumLength = BigInt_larger(oAddend1->lLength, oAddend2->lLength);
+    // ldr     x0, [x0]
+    // ldr     x1, [x1]
+    // bl       BigInt_larger
+    // mov     LSUMLENGTH, x0
 
     // Clear oSum's array if necessary.
     // if (oSum->lLength <= lSumLength) goto endif2;

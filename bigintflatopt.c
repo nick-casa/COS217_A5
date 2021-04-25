@@ -10,23 +10,6 @@
 
 /* In lieu of a boolean data type. */
 enum {FALSE, TRUE};
-
-/*--------------------------------------------------------------------*/
-
-/* Return the larger of lLength1 and lLength2. */
-
-static long BigInt_larger(long lLength1, long lLength2)
-{
-    long lLarger;
-    if (lLength1 <= lLength2) goto else1;
-        lLarger = lLength1;
-    goto endif1;
-    else1:
-        lLarger = lLength2;
-    endif1:
-        return lLarger;
-}
-
 /*--------------------------------------------------------------------*/
 
 /* Assign the sum of oAddend1 and oAddend2 to oSum.  oSum should be

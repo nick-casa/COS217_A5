@@ -284,10 +284,12 @@ endif6:
     mov     x0, 1
     // ldr     x1, [sp, OSUM]
     // mov     x1, OSUM
-    add     x1, OSUM, lsl 3
+    add     x1, OSUM, 8
     // ldr     x2, [sp, LSUMLENGTH]
     mov     x2, LSUMLENGTH
-    str     x0, [x1, x2, lsl 3]
+    mov     x3, [x1,x2, lsl 3]
+    //str     x0, [x1, x2, lsl 3]
+    mov     x3, x0
 
     // lSumLength++;
     //ldr     x0, [sp, LSUMLENGTH]

@@ -41,10 +41,11 @@ int BigInt_add(BigInt_T oAddend1, BigInt_T oAddend2, BigInt_T oSum)
     long lSumLength;
 
     if (oAddend1->lLength <= oAddend2->lLength) goto else1;
-        lSumLength = lLength1;
+        lSumLength = oAddend1->lLength;
+        goto endif1;
     else1:
-        lSumLength = lLength2;
-
+        lSumLength = oAddend2->lLength;
+    endif1:
     /* Determine the larger length. */
     /* lSumLength = BigInt_larger(oAddend1->lLength, oAddend2->lLength); */
 

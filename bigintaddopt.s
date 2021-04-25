@@ -103,7 +103,7 @@ endif1:
         .global BigInt_add
 
 BigInt_add:
- // Prolog
+    // Prolog
     sub     sp, sp, ADD_STACK_BYTECOUNT
     str     x30, [sp]
     str     x19, [sp, 8]
@@ -114,7 +114,7 @@ BigInt_add:
     str     x24, [sp, 48]
     str     x25, [sp, 56]
 
-    //store parameters in registers
+    // store parameters in registers
     mov     OADDEND1, x0
     mov     OADDEND2, x1
     mov     OSUM, x2
@@ -127,14 +127,11 @@ BigInt_add:
     // Determine the larger length.
     // lSumLength = BigInt_larger(oAddend1->lLength, oAddend2->lLength);
     // ldr     x0, [sp, OADDEND1]
-    // ldr     x0, [x0]
-    // ldr     x1, [sp, OADDEND2]
-    // ldr     x1, [x1]
-    mov     x0, OADDEND1
     ldr     x0, [x0]
-    mov     x1, OADDEND2
-    ldr     x1, [x0]
+    // ldr     x1, [sp, OADDEND2]
+    ldr     x1, [x1]
     bl       BigInt_larger
+
     // str     x0, [sp, LSUMLENGTH]
     mov     LSUMLENGTH, x0
 

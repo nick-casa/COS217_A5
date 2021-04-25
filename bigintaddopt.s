@@ -22,7 +22,14 @@
 
         // Local variable stack offsets:
         LLARGER     .req x21 //callee-saved
-1`GER_STACK_BYTECOUNT
+
+        // Parameter stack offsets:
+        LLENGTH2    .req x20 //callee-saved
+        LLENGTH1    .req x19
+
+BigInt_larger:
+    // Prolog
+    sub     sp, sp, LARGER_STACK_BYTECOUNT
     str     x30, [sp]
     str     x19, [sp, 8]
     str     x20, [sp, 16]

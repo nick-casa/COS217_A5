@@ -287,9 +287,8 @@ endif6:
     add     x1, OSUM, 8
     // ldr     x2, [sp, LSUMLENGTH]
     mov     x2, LSUMLENGTH
-    mov     x3, [x1,x2, lsl 3]
-    //str     x0, [x1, x2, lsl 3]
-    mov     x3, x0
+    str     x0, [x1, x2, lsl 3]
+
 
     // lSumLength++;
     //ldr     x0, [sp, LSUMLENGTH]

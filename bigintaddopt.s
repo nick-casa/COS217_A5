@@ -187,20 +187,20 @@ loop1:
 
 //MACKLEMORE EFFICIENT LATER!
     // ulSum += oAddend1->aulDigits[lIndex]
-    //ldr     x0, [sp, ULSUM]
-    mov     x0, ULSUM
-    //ldr     x1, [sp, OADDEND1]
-    mov     x1, OADDEND1
-    add     x1, x1, 8            // gets to aulDigits
-    //ldr     x2, [sp, LINDEX]     // loads lIndex into x2
-    mov     x2, LINDEX
-    ldr     x1, [x1, x2, lsl 3]
-    add     x0, x0, x1
-    // str     x0, [sp, ULSUM]
-    mov     ULSUM, x0
+    /////////////////////////////// ldr     x0, [sp, ULSUM]
+    /////////////////////////////// mov     x0, ULSUM
+    /////////////////////////////// ldr     x1, [sp, OADDEND1]
+    /////////////////////////////// mov     x1, OADDEND1
+    add     x1, OADDEND1, 8            // gets to aulDigits
+    /////////////////////////////// ldr     x2, [sp, LINDEX]     // loads lIndex into x2
+    /////////////////////////////// mov     x2, LINDEX
+    ldr     x1, [x1, LINDEX, lsl 3]
+    add     ULSUM, ULSUM, x1
+    ///////////////////////////////  str     x0, [sp, ULSUM]
+    /////////////////////////////// mov     ULSUM, x0
 
     // if (ulSum >= oAddend1->aulDigits[lIndex])  goto endif3;
-    cmp     x0, x1
+    cmp     ULSUM, x1
     bhs     endif3
 
     // ulCarry = 1;
@@ -233,35 +233,35 @@ endif3:
 
 endif4:
     // oSum->aulDigits[lIndex] = ulSum;
-    //check this
-    // ldr     x0, [sp, ULSUM]
+    //////////////////////////////////// check this
+    ////////////////////////////////////  ldr     x0, [sp, ULSUM]
     mov     x0, ULSUM
-    // ldr     x1, [sp, OSUM]
-    // mov     x1, OSUM
+    ////////////////////////////////////  ldr     x1, [sp, OSUM]
+    ////////////////////////////////////  mov     x1, OSUM
     add     x1, OSUM, 8
-    // ldr     x2, [sp, LINDEX]
-    mov     x2, LINDEX
-    str     x0, [x1, x2, lsl 3]
+    ////////////////////////////////////  ldr     x2, [sp, LINDEX]
+    ////////////////////////////////////  mov     x2, LINDEX
+    str     x0, [x1, LINDEX, lsl 3]
 
     // lIndex++;
-    //ldr     x0, [sp, LINDEX]
-    //add     x0, x0, 1
-    //str     x0, [sp, LINDEX]
+    //////////////////////////////////// ldr     x0, [sp, LINDEX]
+    //////////////////////////////////// add     x0, x0, 1
+    //////////////////////////////////// str     x0, [sp, LINDEX]
     add     LINDEX, LINDEX, 1
 
     // goto loop1;
     b       loop1
 
 endLoop:
-    // Check for a carry out of the last "column" of the addition.
+    ///////////////////////////////// Check for a carry out of the last "column" of the addition.
     // if (ulCarry != 1) goto endif5;
-    //ldr     x0, [sp, ULCARRY]
-    //cmp     x0, 1
+    ///////////////////////////////// ldr     x0, [sp, ULCARRY]
+    ///////////////////////////////// wcmp     x0, 1
     cmp     ULCARRY, 1
     bne     endif5
 
     // if (lSumLength != MAX_DIGITS) goto endif6;
-    //ldr     x0, [sp, LSUMLENGTH]
+    ///////////////////////////////// ldr     x0, [sp, LSUMLENGTH]
     cmp     LSUMLENGTH, MAX_DIGITS
     bne     endif6
 
@@ -280,31 +280,31 @@ endLoop:
 
 endif6:
     // oSum->aulDigits[lSumLength] = 1;
-    //check this
+    ///////////////////////////////// check this
     mov     x0, 1
-    // ldr     x1, [sp, OSUM]
-    // mov     x1, OSUM
+    /////////////////////////////////  ldr     x1, [sp, OSUM]
+    /////////////////////////////////  mov     x1, OSUM
     add     x1, OSUM, 8
-    // ldr     x2, [sp, LSUMLENGTH]
+    /////////////////////////////////  ldr     x2, [sp, LSUMLENGTH]
     mov     x2, LSUMLENGTH
     str     x0, [x1, x2, lsl 3]
 
 
-    // lSumLength++;
-    //ldr     x0, [sp, LSUMLENGTH]
-    //add     x0, x0, 1
-    //str     x0, [sp, LSUMLENGTH]
+    ///////////////////////////////// lSumLength++;
+    ///////////////////////////////// ldr     x0, [sp, LSUMLENGTH]
+    ///////////////////////////////// add     x0, x0, 1
+    ///////////////////////////////// str     x0, [sp, LSUMLENGTH]
     add     LSUMLENGTH,LSUMLENGTH,1
 
 endif5:
-    // Set the length of the sum.
     // oSum->lLength = lSumLength;
-    //ldr     x1, [sp, LSUMLENGTH]
-    //ldr     x0, [sp, OSUM]
-    //str     x1, [x0]
-    //CHECK THIS
-    //mov     x0, OSUM
-    //ldr     x0, [x0]
+    ////////////////////////   Set the length of the sum.
+    ////////////////////////  ldr     x1, [sp, LSUMLENGTH]
+    ////////////////////////  ldr     x0, [sp, OSUM]
+    ////////////////////////  str     x1, [x0]
+    ////////////////////////  CHECK THIS
+    ////////////////////////  mov     x0, OSUM
+    ////////////////////////  ldr     x0, [x0]
     mov     OSUM, LSUMLENGTH
 
     // return TRUE;

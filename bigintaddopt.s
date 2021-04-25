@@ -283,8 +283,8 @@ endif6:
     //check this
     mov     x0, 1
     // ldr     x1, [sp, OSUM]
-    mov     x1, OSUM
-    add     x1, x1, 8
+    // mov     x1, OSUM
+    add     x1, OSUM, lsl 3
     // ldr     x2, [sp, LSUMLENGTH]
     mov     x2, LSUMLENGTH
     str     x0, [x1, x2, lsl 3]
@@ -302,9 +302,9 @@ endif5:
     //ldr     x0, [sp, OSUM]
     //str     x1, [x0]
     //CHECK THIS
-    mov     x0, OSUM
-    ldr     x0, [x0]
-    mov     x0, LSUMLENGTH
+    //mov     x0, OSUM
+    //ldr     x0, [x0]
+    mov     OSUM, LSUMLENGTH
 
     // return TRUE;
     mov     x0, TRUE

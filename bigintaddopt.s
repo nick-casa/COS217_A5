@@ -302,7 +302,9 @@ endif5:
     //ldr     x0, [sp, OSUM]
     //str     x1, [x0]
     //CHECK THIS
-    mov     OSUM, LSUMLENGTH
+    mov     x0, OSUM
+    ldr     x0, [x0]
+    mov     x0, LSUMLENGTH
 
     // return TRUE;
     mov     x0, TRUE

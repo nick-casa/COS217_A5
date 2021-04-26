@@ -102,13 +102,12 @@ endif2:
 loop1:
     // ulSum = ulCarry;
     // mov     ULSUM, ULCARRY
-    mov      ULSUM, 0
-    bcc      endBranch
-    mov      ULSUM, 1
+    mov     x0, NZCV
+    mrs     ULSUM, NZCV
 
 endBranch:
     mov     x0, 0
-    msr     NZCV,x0
+    msr     NZCV, x0
 
     // ulSum += oAddend1->aulDigits[lIndex]
     add     x1, OADDEND1, 8            // gets to aulDigits

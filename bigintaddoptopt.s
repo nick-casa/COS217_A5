@@ -102,7 +102,6 @@ endif2:
 loop1:
     // ulSum = ulCarry;
     // mov     ULSUM, ULCARRY
-    mrs     w0, NZCV
     mrs     ULSUM, NZCV
 
 endBranch:

@@ -107,6 +107,9 @@ loop1:
     mov      ULSUM, 1
 
 endBranch:
+    mov     x0, 0
+    msr     CRm,x0
+
     // ulSum += oAddend1->aulDigits[lIndex]
     add     x1, OADDEND1, 8            // gets to aulDigits
     ldr     x1, [x1, LINDEX, lsl 3]

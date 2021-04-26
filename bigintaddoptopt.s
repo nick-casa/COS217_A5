@@ -103,7 +103,7 @@ endif2:
 
 loop1:
     // ulSum = ulCarry;
-    mov     ULSUM, w34
+    mov     ULSUM, x34
 
 
     // ulSum += oAddend1->aulDigits[lIndex]
@@ -134,7 +134,7 @@ loop1:
 endLoop:
     // Check for a carry out of the last "column" of the addition.
     // if (ulCarry != 1) goto endif5;
-    cmp     w34, 1
+    cmp     x34, 1
     bne     endif5
 
     // if (lSumLength != MAX_DIGITS) goto endif6;

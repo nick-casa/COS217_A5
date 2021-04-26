@@ -49,6 +49,7 @@ int BigInt_add(BigInt_T oAddend1, BigInt_T oAddend2, BigInt_T oSum)
 
         /* Check for overflow. */
         if (ulSum >= oAddend1->aulDigits[lIndex])  goto endif3;
+
         ulCarry = 1;
         endif3:
             ulSum += oAddend2->aulDigits[lIndex];

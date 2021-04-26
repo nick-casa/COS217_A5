@@ -94,30 +94,47 @@ endif1:
 endif2:
     // Perform the addition.
     // ulCarry = 0;
-    // mov     ULCARRY, 0
+    mov     ULCARRY, 0
     mov     LINDEX, 0
 
     // if(lIndex >= lSumLength) goto endLoop;
     cmp     LINDEX, LSUMLENGTH
     bge     endLoop
-
 loop1:
     // ulSum = ulCarry;
-    mov     ULSUM, x34
+    mov     ULSUM, ULCARRY
 
+
+    // ulCarry = 0;
+    mov     ULCARRY, 0
 
     // ulSum += oAddend1->aulDigits[lIndex]
     add     x1, OADDEND1, 8            // gets to aulDigits
     ldr     x1, [x1, LINDEX, lsl 3]
     add     ULSUM, ULSUM, x1
 
+    // if (ulSum >= oAddend1->aulDigits[lIndex])  goto endif3;
+    cmp     ULSUM, x1
+    bhs     endif3
 
+    // ulCarry = 1;
+    mov     ULCARRY, 1
+
+
+endif3:
     //  ulSum += oAddend2->aulDigits[lIndex];
     add     x1, OADDEND2, 8    //  gets to aulDigits
     ldr     x1, [x1, LINDEX, lsl 3]
     add     ULSUM, ULSUM, x1
 
+    // if (ulSum >= oAddend2->aulDigits[lIndex]) goto endif4; /* Check for overflow. */
+    cmp     ULSUM, x1
+    bhs     endif4
 
+    // ulCarry = 1;
+    mov     ULCARRY, 1
+
+endif4:
     // oSum->aulDigits[lIndex] = ulSum;
     mov     x0, ULSUM
     add     x1, OSUM, 8
@@ -134,7 +151,7 @@ loop1:
 endLoop:
     // Check for a carry out of the last "column" of the addition.
     // if (ulCarry != 1) goto endif5;
-    cmp     x34, 1
+    cmp     ULCARRY, 1
     bne     endif5
 
     // if (lSumLength != MAX_DIGITS) goto endif6;

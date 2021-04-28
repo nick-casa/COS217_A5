@@ -264,7 +264,8 @@ static void boundaryTest(void)
    }
 
    {  /* ffffffffffffffff0000000000000001 + ffffffffffffffff,
-         ffffffffffffffff + ffffffffffffffff0000000000000001 */
+         ffffffffffffffff + ffffffffffffffff0000000000000001
+                                            ffffffffffffffff */
 
       BigInt_T oFirst = createBigInt(0);
       BigInt_T oSecond = createBigInt(ULONG_MAX);

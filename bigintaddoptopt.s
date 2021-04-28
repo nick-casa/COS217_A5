@@ -100,7 +100,7 @@ endBranch:
     ldr     x1, [x1, LINDEX, lsl 3]
 
     bcc     addCarryNotSet
-    adc     ULSUM, ULSUM, x1
+    add     ULSUM, ULSUM, x1
     b       postAdd
 addCarryNotSet:
     adcs    ULSUM, ULSUM, x1

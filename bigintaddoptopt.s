@@ -85,7 +85,7 @@ endif2:
 
 endBranch:
     // ulSum = ulCarry
-    // mov     ULSUM, x4
+    // mov     ULSUM, 0
     // ulCarry = 0
     adcs    x0, x0, xzr
 
@@ -94,10 +94,18 @@ endBranch:
     ldr     x1, [x1, LINDEX, lsl 3]
     adcs    ULSUM, ULSUM, x1
 
+
     //  ulSum += oAddend2->aulDigits[lIndex];
     add     x1, OADDEND2, 8    //  gets to aulDigits
     ldr     x1, [x1, LINDEX, lsl 3]
+
+    bcs     addCarryNotSet
+
     adcs    ULSUM, ULSUM, x1
+addCarryNotSet:
+    adc     ULSUM, ULSUM, x1
+
+
 
     // oSum->aulDigits[lIndex] = ulSum;
     add     x1, OSUM, 8

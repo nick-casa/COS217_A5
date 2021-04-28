@@ -87,7 +87,7 @@ endBranch:
     // ulSum = ulCarry
     // mov     ULSUM, x4
     // ulCarry = 0
-    adcs    x0, x0, xzr
+    // adcs    x0, x0, xzr
 
     // ulSum += oAddend1->aulDigits[lIndex]
     add     x1, OADDEND1, 8            // gets to aulDigits
@@ -107,11 +107,12 @@ endBranch:
     add     LINDEX, LINDEX, 1
 
     bcc     endBranch2;
+
 carry1:
     mov     ULSUM, 1
-    b       endBranch2
-carry0:
-    mov     ULSUM, 0
+//    b       endBranch2
+//carry0:
+//    mov     ULSUM, 0
 
 endBranch2:
     // if(lIndex < lSumLength) goto loop1;

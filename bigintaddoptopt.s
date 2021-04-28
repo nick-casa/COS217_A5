@@ -104,7 +104,7 @@ endif2:
 
 loop1:
     // ulSum = ulCarry;
-    // mov     ULSUM, x4
+    mov     ULSUM, x4
 
 endBranch:
     mov     x0, 0
@@ -131,10 +131,10 @@ endBranch:
     bcs     carryis1
     bcc     carryis0
 carryis1:
-    mov     ULSUM, 1
+    mov     x4, 1
     b       endBranch2
 carryis0:
-    mov     ULSUM, 0
+    mov     x4, 0
 
 endBranch2:
     // if(lIndex < lSumLength) goto loop1;

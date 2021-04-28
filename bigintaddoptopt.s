@@ -109,12 +109,10 @@ postAdd:
     // oSum->aulDigits[lIndex] = ulSum;
     add     x1, OSUM, 8
     str     ULSUM, [x1, LINDEX, lsl 3]
-
     // lIndex++;
     add     LINDEX, LINDEX, 1
 
-    bcc     endBranch2;
-
+    bcc     carry0;
 carry1:
     mov     ULSUM, 1
     b       endBranch2

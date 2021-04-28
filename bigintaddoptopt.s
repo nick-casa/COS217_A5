@@ -103,9 +103,11 @@ endBranch:
 
 carry3:
     mov     x4, 1
-    b       endBranch2
+    b       endCarry
 carry4:
     mov     x4, 0
+
+endCarry:
 
     // oSum->aulDigits[lIndex] = ulSum;
     mov     x0, ULSUM

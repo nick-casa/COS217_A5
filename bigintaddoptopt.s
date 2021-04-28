@@ -87,7 +87,10 @@ endif2:
 
 
 endBranch:
+    // ulSum = ulCarry
     mov     ULSUM, x4
+    // ulCarry = 0
+    adcs    x0, x0, xzr
 
     // ulSum += oAddend1->aulDigits[lIndex]
     add     x1, OADDEND1, 8            // gets to aulDigits

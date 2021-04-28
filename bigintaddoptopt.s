@@ -101,14 +101,17 @@ endBranch:
     add     x1, OADDEND1, 8            // gets to aulDigits
     ldr     x1, [x1, LINDEX, lsl 3]
     adcs    ULSUM, ULSUM, x1
+
     //  ulSum += oAddend2->aulDigits[lIndex];
     add     x1, OADDEND2, 8    //  gets to aulDigits
     ldr     x1, [x1, LINDEX, lsl 3]
     adcs    ULSUM, ULSUM, x1
+
     // oSum->aulDigits[lIndex] = ulSum;
     mov     x0, ULSUM
     add     x1, OSUM, 8
     str     x0, [x1, LINDEX, lsl 3]
+
     // lIndex++;
     add     LINDEX, LINDEX, 1
     bcs     carryis1

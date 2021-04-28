@@ -37,6 +37,7 @@ BigInt_add:
     str     x23, [sp, 40]
     str     x24, [sp, 48]
     str     x25, [sp, 56]
+
     // store parameters in registers
     mov     OADDEND1, x0
     mov     OADDEND2, x1
@@ -45,6 +46,7 @@ BigInt_add:
     // unsigned long ulSum;
     // long lIndex;
     // long lSumLength;
+
     // if (oAddend1->lLength <= oAddend2->lLength) goto else1;
     ldr     x0, [x0]
     ldr     x1, [x1]
@@ -57,6 +59,7 @@ BigInt_add:
 else1:
     // lSumLength = oAddend2->lLength
     mov     LSUMLENGTH, x1
+
 endif1:
     // Determine the larger length.
     // lSumLength = BigInt_larger(oAddend1->lLength, oAddend2->lLength);

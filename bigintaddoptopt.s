@@ -99,13 +99,12 @@ endBranch:
     add     x1, OADDEND2, 8    //  gets to aulDigits
     ldr     x1, [x1, LINDEX, lsl 3]
 
-    bcs     addCarryNotSet
-
-    adcs    ULSUM, ULSUM, x1
-addCarryNotSet:
+    bcc     addCarryNotSet
     adc     ULSUM, ULSUM, x1
-
-
+    b       postAdd
+addCarryNotSet:
+    adcs    ULSUM, ULSUM, x1
+postAdd:
 
     // oSum->aulDigits[lIndex] = ulSum;
     add     x1, OSUM, 8

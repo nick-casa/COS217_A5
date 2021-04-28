@@ -105,7 +105,6 @@ endBranch:
 addCarryNotSet:
     adcs    ULSUM, ULSUM, x1
 postAdd:
-
     // oSum->aulDigits[lIndex] = ulSum;
     add     x1, OSUM, 8
     str     ULSUM, [x1, LINDEX, lsl 3]

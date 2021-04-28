@@ -85,8 +85,6 @@ endif2:
     cmp     LINDEX, LSUMLENGTH
     bge     endLoop
 
-
-
 loop0:
     adcs    x0, x0, xzr
     b       endBranch
@@ -97,6 +95,7 @@ loop1:
     cmp     x0, x1
 
 endBranch:
+
     // ulSum += oAddend1->aulDigits[lIndex]
     add     x1, OADDEND1, 8            // gets to aulDigits
     ldr     x1, [x1, LINDEX, lsl 3]
@@ -114,6 +113,7 @@ endBranch:
 
     // lIndex++;
     add     LINDEX, LINDEX, 1
+
     bcc     carryis0
 
 carryis1:
@@ -125,8 +125,8 @@ carryis0:
 
 endBranch2:
     // if(lIndex < lSumLength) goto loop1;
-    bcs     setcarry1
-    bcc     setcarry0
+    cmp     x4, 1
+    bne     setcarry0
 
 setcarry1:
     cmp     LINDEX, LSUMLENGTH

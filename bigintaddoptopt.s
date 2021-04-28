@@ -89,9 +89,6 @@ endBranch:
     // ulCarry = 0
     adcs    x0, x0, xzr
 
-    // lIndex++;
-    add     LINDEX, LINDEX, 1
-
     // ulSum += oAddend1->aulDigits[lIndex]
     add     x1, OADDEND1, 8            // gets to aulDigits
     ldr     x1, [x1, LINDEX, lsl 3]
@@ -105,6 +102,9 @@ endBranch:
     // oSum->aulDigits[lIndex] = ulSum;
     add     x1, OSUM, 8
     str     ULSUM, [x1, LINDEX, lsl 3]
+
+    // lIndex++;
+    add     LINDEX, LINDEX, 1
 
     bcc     carry0
 carry1:

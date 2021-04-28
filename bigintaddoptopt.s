@@ -96,7 +96,7 @@ endif2:
     mov     LINDEX, 0
 
     // set carry to 0
-
+    // x4 = carry
 
     // if(lIndex >= lSumLength) goto endLoop;
     cmp     LINDEX, LSUMLENGTH
@@ -111,7 +111,6 @@ loop1:
 
 endBranch:
     mov     x0, 0
-    msr     NZCV, x0
     adcs    x0, x0, xzr
 
     // ulSum += oAddend1->aulDigits[lIndex]
@@ -132,6 +131,9 @@ endBranch:
     // lIndex++;
     add     LINDEX, LINDEX, 1
 
+    // x4 = carry
+    MSR     nzcv, x4
+
     // if(lIndex < lSumLength) goto loop1;
     cmp     LINDEX, LSUMLENGTH
     blt     loop1
@@ -143,6 +145,7 @@ endLoop:
     // if (ulCarry != 1) goto endif5;
     // cmp     ULCARRY, 1
     // bne     endif5
+    // cmp      x4, 1
     bcc         endif5
 
     // if (lSumLength != MAX_DIGITS) goto endif6;

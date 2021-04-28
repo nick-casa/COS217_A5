@@ -131,21 +131,18 @@ endBranch:
     // lIndex++;
     add     LINDEX, LINDEX, 1
 
-    // x4 = carry
     // MRS     x4, nzcv
     bhs     carryis1
     bcc     carryis0
-
-    carryis1:
+carryis1:
     mov     x4, 1
     b       endBranch2
-    carryis0:
+carryis0:
     mov     x4, 0
-   // if(lIndex < lSumLength) goto loop1;
-    endBranch2:
+    // if(lIndex < lSumLength) goto loop1;
+endBranch2:
     cmp     LINDEX, LSUMLENGTH
     blt     loop1
-
 
 endLoop:
 

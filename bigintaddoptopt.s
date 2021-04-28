@@ -12,10 +12,9 @@
         // Must be a multiple of 16
         .equ    ADD_STACK_BYTECOUNT, 64
         // Local variables stack offsets:
-        LSUMLENGTH  .req x25
-        LINDEX      .req x24
-        ULSUM       .req x23
-        ULCARRY     .req x22
+        LSUMLENGTH  .req x24
+        LINDEX      .req x23
+        ULSUM       .req x22
         // Parameter stack offsets:
         OSUM        .req x21
         OADDEND2    .req x20 //callee-saved

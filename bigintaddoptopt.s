@@ -95,6 +95,9 @@ endif2:
     // Perform the addition.
     mov     LINDEX, 0
 
+    // set carry to 0
+
+
     // if(lIndex >= lSumLength) goto endLoop;
     cmp     LINDEX, LSUMLENGTH
     bge     endLoop
@@ -109,6 +112,7 @@ loop1:
 endBranch:
     mov     x0, 0
     msr     NZCV, x0
+    adcs    x0, x0, xzr
 
     // ulSum += oAddend1->aulDigits[lIndex]
     add     x1, OADDEND1, 8            // gets to aulDigits
@@ -134,6 +138,7 @@ endBranch:
 
 
 endLoop:
+
     // Check for a carry out of the last "column" of the addition.
     // if (ulCarry != 1) goto endif5;
     // cmp     ULCARRY, 1

@@ -105,8 +105,8 @@ endif2:
 loop1:
     // ulSum = ulCarry;
     // mov     ULSUM, ULCARRY
-    //mov     ULSUM, 1
-   // bcs     endBranch
+    // mov     ULSUM, 1
+    // bcs     endBranch
     mov     ULSUM, 0
 
 endBranch:

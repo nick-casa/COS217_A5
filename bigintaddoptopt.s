@@ -76,7 +76,7 @@ endif1:
 endif2:
     // Perform the addition.
     mov     LINDEX, 0
-    mov     x4, 0
+    mov     x4, 1
 
     // if(lIndex >= lSumLength) goto endLoop;
     cmp     LINDEX, LSUMLENGTH
@@ -100,7 +100,6 @@ endBranch:
     adcs    ULSUM, ULSUM, x1
 
     // oSum->aulDigits[lIndex] = ulSum;
-    //mov     x0, ULSUM
     add     x1, OSUM, 8
     str     ULSUM, [x1, LINDEX, lsl 3]
 

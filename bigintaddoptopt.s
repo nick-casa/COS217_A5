@@ -74,7 +74,7 @@ endif1:
     // lSumLength = BigInt_larger(oAddend1->lLength, oAddend2->lLength);
     // ldr     x0, [x0]
     // ldr     x1, [x1]
-    // bl       BigInt_larger
+    // bl      BigInt_larger
     // mov     LSUMLENGTH, x0
 
     // Clear oSum's array if necessary.
@@ -107,7 +107,7 @@ loop1:
     // mov     ULSUM, ULCARRY
     // mov     ULSUM, 1
     // bcs     endBranch
-    mov     ULSUM, 0
+    mov     ULSUM, x4
 
 endBranch:
     mov     x0, 0

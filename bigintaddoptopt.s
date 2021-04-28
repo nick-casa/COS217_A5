@@ -85,16 +85,9 @@ endif2:
     cmp     LINDEX, LSUMLENGTH
     bge     endLoop
 
-loop0:
-    adcs    x0, x0, xzr
-    b       endBranch
-loop1:
-    // ulSum = ulCarry;
-    mov     x0, 0
-    mov     x1, 1
-    cmp     x0, x1
 
 endBranch:
+    mov     ULSUM, x4
 
     // ulSum += oAddend1->aulDigits[lIndex]
     add     x1, OADDEND1, 8            // gets to aulDigits
@@ -114,28 +107,15 @@ endBranch:
     // lIndex++;
     add     LINDEX, LINDEX, 1
 
-    bcc     carryis0
-
-carryis1:
-    mov     x4, 1
-    b       endBranch2
-
-carryis0:
-    mov     x4, 0
+    // Copies all of NZCV in x4 as hex
+    mrs     x4, NZCV
+    lsl     x4, x4, 2
+    lsr     x4, x4, 31
 
 endBranch2:
     // if(lIndex < lSumLength) goto loop1;
-    cmp     x4, 1
-    bne     setcarry0
-
-setcarry1:
     cmp     LINDEX, LSUMLENGTH
-    blt     loop1
-    b       endLoop
-
-setcarry0:
-    cmp     LINDEX,LSUMLENGTH
-    blt     loop0
+    blt     endBranch
 
 endLoop:
     // Check for a carry out of the last "column" of the addition.
@@ -144,6 +124,7 @@ endLoop:
     // bne     endif5
     cmp      x4, 1
     bne      endif5
+
     // if (lSumLength != MAX_DIGITS) goto endif6;
     cmp     LSUMLENGTH, MAX_DIGITS
     bne     endif6

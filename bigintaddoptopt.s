@@ -118,7 +118,7 @@ carry0:
 endBranch2:
     // if(lIndex < lSumLength) goto loop1;
     cmp     LINDEX, LSUMLENGTH
-    blo     endBranch
+    blt     endBranch
 
 endLoop:
     // Check for a carry out of the last "column" of the addition.

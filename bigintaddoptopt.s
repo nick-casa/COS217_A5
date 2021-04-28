@@ -38,7 +38,7 @@ BigInt_add:
     mov     OADDEND1, x0
     mov     OADDEND2, x1
     mov     OSUM, x2
-
+        
     // if (oAddend1->lLength <= oAddend2->lLength) goto else1;
     ldr     x0, [x0]
     ldr     x1, [x1]
@@ -59,12 +59,13 @@ endif1:
     // Determine the larger length.
     // lSumLength = BigInt_larger(oAddend1->lLength, oAddend2->lLength);
     // if (oSum->lLength <= lSumLength) goto endif2;
+    add     x0, OSUM, 8
     ldr     x2, [OSUM]
     cmp     x2, LSUMLENGTH
     ble     endif2
 
     //  memset(oSum->aulDigits, 0, MAX_DIGITS * sizeof(unsigned long));
-    add     x0, OSUM, 8
+   // add     x0, OSUM, 8
     mov     x1, 0
     mov     x2, MAX_DIGITS
     mov     x3, SIZE_UNSIGNEDLONG
@@ -74,36 +75,38 @@ endif1:
 endif2:
     // Perform the addition.
     mov     LINDEX, 0
-    mov     ULSUM, 0
+        mov     ULSUM, 0
+        add x5, OADDEND1, 8
+        add x6, OADDEND2, 8
+   // add     x4, OSUM, 8
 
-    // if(lIndex >= lSumLength) goto endLoop;
+  // if(lIndex >= lSumLength) goto endLoop;
     cmp     LINDEX, LSUMLENGTH
     bge     endLoop
-
 
 endBranch:
     // ulSum = ulCarry
     adcs    x0, x0, xzr
 
     // ulSum += oAddend1->aulDigits[lIndex]
-    add     x1, OADDEND1, 8
-    ldr     x1, [x1, LINDEX, lsl 3]
-    adcs    ULSUM, ULSUM, x1
+    //add     x5, OADDEND1, 8
+    ldr     x7, [x5, LINDEX, lsl 3]
+    adcs    ULSUM, ULSUM, x7
 
     //  ulSum += oAddend2->aulDigits[lIndex];
-    add     x1, OADDEND2, 8
-    ldr     x1, [x1, LINDEX, lsl 3]
+   // add     x6, OADDEND2, 8
+    ldr     x9, [x6, LINDEX, lsl 3]
 
     bcc     addCarryNotSet
-    add     ULSUM, ULSUM, x1
+    add     ULSUM, ULSUM, x9
     b       postAdd
 addCarryNotSet:
-    adcs    ULSUM, ULSUM, x1
+    adcs    ULSUM, ULSUM, x9
 
 postAdd:
     // oSum->aulDigits[lIndex] = ulSum;
-    add     x1, OSUM, 8
-    str     ULSUM, [x1, LINDEX, lsl 3]
+    //add     x1, OSUM, 8
+    str     ULSUM, [x0, LINDEX, lsl 3]
     // lIndex++;
     add     LINDEX, LINDEX, 1
 
@@ -142,10 +145,10 @@ endLoop:
 
 endif6:
     // oSum->aulDigits[lSumLength] = 1;
-    mov     x0, 1
-    add     x1, OSUM, 8
-    //    mov     x2, LSUMLENGTH
-    str     x0, [x1, LSUMLENGTH, lsl 3]
+    mov     x4, 1
+  // add     x1, OSUM, 8
+   // mov     x2, LSUMLENGTH
+    str     x4, [x0, LSUMLENGTH, lsl 3]
     // lSumLength++;
     add     LSUMLENGTH,LSUMLENGTH,1
 

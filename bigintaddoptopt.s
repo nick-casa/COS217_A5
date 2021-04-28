@@ -92,10 +92,10 @@ loop0:
     b       endBranch
 loop1:
     // ulSum = ulCarry;
-    mrs     x0, cpsr
-    and     x0, x0, x0
-    msr     cpsr_f, x0
-    b       endBranch
+    mov     x0, 0
+    mov     x1, 1
+    cmp     x0, x1
+
 endBranch:
     // ulSum += oAddend1->aulDigits[lIndex]
     add     x1, OADDEND1, 8            // gets to aulDigits

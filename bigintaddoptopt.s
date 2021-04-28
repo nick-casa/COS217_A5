@@ -106,12 +106,12 @@ endBranch:
     // lIndex++;
     add     LINDEX, LINDEX, 1
 
-    bcc     carry0
+    bcc     endBranch2;
 carry1:
     mov     ULSUM, 1
-    b       endBranch2
-carry0:
-    mov     ULSUM, 0
+//    b       endBranch2
+//carry0:
+//    mov     ULSUM, 0
 
 endBranch2:
     // if(lIndex < lSumLength) goto loop1;

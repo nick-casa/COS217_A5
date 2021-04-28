@@ -99,11 +99,12 @@ endBranch:
     ldr     x1, [x1, LINDEX, lsl 3]
     adcs    ULSUM, ULSUM, x1
 
-    bcc     carry3
-carry2:
+    bcc     carry4
+
+carry3:
     mov     x4, 1
     b       endBranch2
-carry3:
+carry4:
     mov     x4, 0
     mov     ULSUM, x4
 

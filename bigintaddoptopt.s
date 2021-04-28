@@ -93,12 +93,18 @@ endBranch:
     add     x1, OADDEND2, 8    //  gets to aulDigits
     ldr     x1, [x1, LINDEX, lsl 3]
     adcs    ULSUM, ULSUM, x1
+
+    bcc noCarry
+    mov     x4, 1
+    b       secondAdd
+noCarry:
+    mov     x4, 0
+
+secondAdd:
     // ulSum += oAddend1->aulDigits[lIndex]
     add     x1, OADDEND1, 8            // gets to aulDigits
     ldr     x1, [x1, LINDEX, lsl 3]
     adcs    ULSUM, ULSUM, x1
-
-
 
     // oSum->aulDigits[lIndex] = ulSum;
     mov     x0, ULSUM

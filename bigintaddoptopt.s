@@ -25,6 +25,7 @@
         .equ    MAX_DIGITS, 32768
         .equ    SIZE_UNSIGNEDLONG, 8
         .global BigInt_add
+
 BigInt_add:
     // Prolog
     sub     sp, sp, ADD_STACK_BYTECOUNT
@@ -82,12 +83,12 @@ endif2:
     mov     LINDEX, 0
 
     // if(lIndex >= lSumLength) goto endLoop;
-
+    cmp     LINDEX, LSUMLENGTH
+    bge     endLoop
 
 loop1:
     // ulSum = ulCarry;
     mov     ULSUM, ULCARRY
-
 
     // ulCarry = 0;
     mov     ULCARRY, 0
@@ -122,6 +123,12 @@ endif4:
     // oSum->aulDigits[lIndex] = ulSum;
     mov     x0, ULSUM
     add     x1, OSUM, 8
+    str     x0, [x1, LINDEX, lsl 3]
+    // lIndex++;
+    add     LINDEX, LINDEX, 1
+    // if(lIndex < lSumLength) goto loop1;
+    cmp     LINDEX, LSUMLENGTH
+    blt     loop1
 
 endLoop:
     // Check for a carry out of the last "column" of the addition.

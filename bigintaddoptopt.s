@@ -96,7 +96,8 @@ endif2:
     mov     LINDEX, 0
 
     // set carry to 0
-    // x4 = carry
+    mov     x4, 0
+
 
     // if(lIndex >= lSumLength) goto endLoop;
     cmp     LINDEX, LSUMLENGTH
@@ -145,8 +146,8 @@ endLoop:
     // if (ulCarry != 1) goto endif5;
     // cmp     ULCARRY, 1
     // bne     endif5
-    // cmp      x4, 1
-    bcc         endif5
+    cmp      x4, 1
+    bne      endif5
 
     // if (lSumLength != MAX_DIGITS) goto endif6;
     cmp     LSUMLENGTH, MAX_DIGITS

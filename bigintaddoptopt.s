@@ -104,12 +104,7 @@ endif2:
 
 // ulSum = ulCarry;
 loop1:
-    // ulSum = ulCarry;
-    mrs     x0, NZCV
-    and     x0, x0, x0
-    msr     NZCV, x0
-    b       endBranch
-
+    cmp     0, 1
 loop0:
     cmp     1, 1
 

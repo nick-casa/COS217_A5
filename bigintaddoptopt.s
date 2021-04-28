@@ -36,7 +36,7 @@ BigInt_add:
     str     x30, [sp]
     str     x19, [sp, 8]
     str     x20, [sp, 16]
-    str     x21, [sp, 24]
+    str     x21, [sp, 24]s
     str     x22, [sp, 32]
     str     x23, [sp, 40]
     str     x24, [sp, 48]
@@ -107,8 +107,8 @@ loop1:
     mov     ULSUM, 0
 
 endBranch:
-    mov     x0, 0
-    msr     NZCV, x0
+    //   mov     x0, 0
+    msr     NZCV, 0
 
     // ulSum += oAddend1->aulDigits[lIndex]
     add     x1, OADDEND1, 8            // gets to aulDigits

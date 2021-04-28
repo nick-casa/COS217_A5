@@ -327,8 +327,11 @@ static void boundaryTest(void)
       BigInt_T oSecond = createBigInt(1);
       BigInt_T oSum = createBigInt(0);
       BigInt_largest(oFirst);
-
-      printf("Boundary test 9a: ");
+       printf("oFirst: ");
+       BigInt_writeHexAbbrev(stdout, oFirst);
+       printf("oSecond: ");
+       BigInt_writeHexAbbrev(stdout, oSecond);
+       printf("Boundary test 9a: ");
       BigInt_writeHexAbbrev(stdout, oFirst);
 
        fflush(stdout);

@@ -85,16 +85,17 @@ endif2:
     cmp     LINDEX, LSUMLENGTH
     bge     endLoop
 
+
+
+loop0:
+    adcs    x0, x0, xzr
+    b       endBranch
 loop1:
     // ulSum = ulCarry;
     mrs     x0, cpsr
     and     x0, x0, x0
     msr     cpsr_f, x0
     b       endBranch
-
-loop0:
-    adcs    x0, x0, xzr
-
 endBranch:
     // ulSum += oAddend1->aulDigits[lIndex]
     add     x1, OADDEND1, 8            // gets to aulDigits

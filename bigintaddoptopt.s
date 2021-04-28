@@ -107,11 +107,12 @@ endBranch:
     // lIndex++;
     add     LINDEX, LINDEX, 1
 
-    bcs     carry0
+    bcc     carry0
 
 carry1:
     mov     x4, 1
     b       endBranch2
+
 carry0:
     mov     x4, 0
 
@@ -166,4 +167,5 @@ endif5:
     ldr     x25, [sp, 56]
     add     sp, sp, ADD_STACK_BYTECOUNT
     ret
-    .size   BigInt_add, (. - BigInt_add)
+
+.size   BigInt_add, (. - BigInt_add)

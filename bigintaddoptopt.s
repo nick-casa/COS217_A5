@@ -107,10 +107,12 @@ endBranch:
     // lIndex++;
     add     LINDEX, LINDEX, 1
 
-    // Copies all of NZCV in x4 as hex
-    mrs     x4, NZCV
-    lsl     x4, x4, 2
-    lsr     x4, x4, 31
+    bcc     carry0
+carry1:
+    mov     x4, 1
+    b endBranch2
+carry0:
+    mov     x4, 0
 
 endBranch2:
     // if(lIndex < lSumLength) goto loop1;

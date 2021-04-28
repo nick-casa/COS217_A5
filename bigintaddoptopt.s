@@ -104,9 +104,9 @@ endif2:
 
 loop1:
     // ulSum = ulCarry;
-    mrs     x0, cpsr
+    mrs     x0, NZCV
     and     x0, x0, x0
-    msr     cpsr_f, x0
+    msr     NZCV, x0
     b       endBranch
 
 loop0:

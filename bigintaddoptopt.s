@@ -102,6 +102,7 @@ endif2:
     cmp     LINDEX, LSUMLENGTH
     bge     endLoop
 
+// ulSum = ulCarry;
 loop1:
     // ulSum = ulCarry;
     mrs     x0, NZCV
@@ -110,7 +111,7 @@ loop1:
     b       endBranch
 
 loop0:
-    adcs    x0, x0, xzr
+    cmp     1, 1
 
 endBranch:
 

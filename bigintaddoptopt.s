@@ -104,7 +104,7 @@ endif2:
 
 loop1:
     // ulSum = ulCarry;
-    mov     ULSUM, x4
+    mov     ULSUM, 0
 
 endBranch:
     mov     x0, 0

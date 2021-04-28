@@ -107,8 +107,8 @@ loop1:
     mov     ULSUM, 0
 
 endBranch:
-    mov     x0, 0
-    adcs    x0, x0, xzr
+    //mov     x0, 0
+    //adcs    x0, x0, xzr
 
     // ulSum += oAddend1->aulDigits[lIndex]
     add     x1, OADDEND1, 8            // gets to aulDigits
@@ -130,6 +130,7 @@ endBranch:
 
     bcs     carryis1
     bcc     carryis0
+
 carryis1:
     mov     x4, 1
     b       endBranch2

@@ -10,7 +10,7 @@
         // distinct from oAddend1 and oAddend2.  Return 0 (FALSE) if an
         // overflow occurred, and 1 (TRUE) otherwise.
         // Must be a multiple of 16
-        .equ    ADD_STACK_BYTECOUNT, 64
+        .equ    ADD_STACK_BYTECOUNT, 48
         // Local variables stack offsets:
         LSUMLENGTH  .req x24
         LINDEX      .req x23
@@ -33,7 +33,6 @@ BigInt_add:
     str     x22, [sp, 32]
     str     x23, [sp, 40]
     str     x24, [sp, 48]
-    str     x25, [sp, 56]
 
     // store parameters in registers
     mov     OADDEND1, x0
@@ -140,7 +139,6 @@ endLoop:
     ldr     x22, [sp, 32]
     ldr     x23, [sp, 40]
     ldr     x24, [sp, 48]
-    ldr     x25, [sp, 56]
     add     sp, sp, ADD_STACK_BYTECOUNT
     ret
 
@@ -165,7 +163,6 @@ endif5:
     ldr     x22, [sp, 32]
     ldr     x23, [sp, 40]
     ldr     x24, [sp, 48]
-    ldr     x25, [sp, 56]
     add     sp, sp, ADD_STACK_BYTECOUNT
     ret
     .size   BigInt_add, (. - BigInt_add)

@@ -98,7 +98,7 @@ endBranch:
     //  ulSum += oAddend2->aulDigits[lIndex];
     add     x1, OADDEND2, 8    //  gets to aulDigits
     ldr     x1, [x1, LINDEX, lsl 3]
-    adc    ULSUM, ULSUM, x1
+    adcs    ULSUM, ULSUM, x1
 
     // oSum->aulDigits[lIndex] = ulSum;
     add     x1, OSUM, 8

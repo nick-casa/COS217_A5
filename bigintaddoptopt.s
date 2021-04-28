@@ -76,7 +76,7 @@ endif1:
 endif2:
     // Perform the addition.
     mov     LINDEX, 0
-    mov     x4, 0
+    mov     ULSUM, 0
 
     // if(lIndex >= lSumLength) goto endLoop;
     cmp     LINDEX, LSUMLENGTH
@@ -85,14 +85,14 @@ endif2:
 
 endBranch:
     // ulSum = ulCarry
-    mov     ULSUM, x4
+    // mov     ULSUM, x4
     // ulCarry = 0
     adcs    x0, x0, xzr
 
     // ulSum += oAddend1->aulDigits[lIndex]
     add     x1, OADDEND1, 8            // gets to aulDigits
     ldr     x1, [x1, LINDEX, lsl 3]
-    add    ULSUM, ULSUM, x1
+    adcs    ULSUM, ULSUM, x1
 
     //  ulSum += oAddend2->aulDigits[lIndex];
     add     x1, OADDEND2, 8    //  gets to aulDigits
@@ -108,10 +108,10 @@ endBranch:
 
     bcc     carry0
 carry1:
-    mov     x4, 1
+    mov     ULSUM, 1
     b       endBranch2
 carry0:
-    mov     x4, 0
+    mov     ULSUM, 0
 
 endBranch2:
     // if(lIndex < lSumLength) goto loop1;
@@ -121,7 +121,7 @@ endBranch2:
 endLoop:
     // Check for a carry out of the last "column" of the addition.
     // if (ulCarry != 1) goto endif5;
-    cmp      x4, 1
+    cmp      ULSUM, 1
     bne      endif5
 
     // if (lSumLength != MAX_DIGITS) goto endif6;

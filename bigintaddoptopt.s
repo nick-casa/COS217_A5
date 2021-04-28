@@ -98,7 +98,6 @@ endif2:
     // set carry to 0
     mov     x4, 0
 
-
     // if(lIndex >= lSumLength) goto endLoop;
     cmp     LINDEX, LSUMLENGTH
     bge     endLoop
@@ -133,7 +132,7 @@ endBranch:
     add     LINDEX, LINDEX, 1
 
     // x4 = carry
-    MSR     nzcv, x4
+    MRS     x4, nzcv
 
     // if(lIndex < lSumLength) goto loop1;
     cmp     LINDEX, LSUMLENGTH

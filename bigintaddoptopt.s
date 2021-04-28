@@ -133,7 +133,7 @@ endBranch:
 
     // x4 = carry
     // MRS     x4, nzcv
-    bcs     carryis1
+    bhs     carryis1
     bcc     carryis0
 
     carryis1:

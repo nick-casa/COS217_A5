@@ -85,7 +85,7 @@ endif2:
 
 endBranch:
     // ulSum = ulCarry
-    mov     ULSUM, 0
+    // mov     ULSUM, x4
     // ulCarry = 0
     adcs    x0, x0, xzr
     mov     x4, 0

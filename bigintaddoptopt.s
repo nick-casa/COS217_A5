@@ -83,18 +83,15 @@ endif2:
 
 endBranch:
     // ulSum = ulCarry
-    // mov     ULSUM, 0
-    // ulCarry = 0
     adcs    x0, x0, xzr
 
     // ulSum += oAddend1->aulDigits[lIndex]
-    add     x1, OADDEND1, 8            // gets to aulDigits
+    add     x1, OADDEND1, 8
     ldr     x1, [x1, LINDEX, lsl 3]
     adcs    ULSUM, ULSUM, x1
 
-
     //  ulSum += oAddend2->aulDigits[lIndex];
-    add     x1, OADDEND2, 8    //  gets to aulDigits
+    add     x1, OADDEND2, 8
     ldr     x1, [x1, LINDEX, lsl 3]
 
     bcc     addCarryNotSet
@@ -102,6 +99,7 @@ endBranch:
     b       postAdd
 addCarryNotSet:
     adcs    ULSUM, ULSUM, x1
+
 postAdd:
     // oSum->aulDigits[lIndex] = ulSum;
     add     x1, OSUM, 8

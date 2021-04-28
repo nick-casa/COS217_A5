@@ -35,21 +35,21 @@ BigInt_add:
     str     x23, [sp, 40]
     str     x24, [sp, 48]
     str     x25, [sp, 56]
+
     // store parameters in registers
     mov     OADDEND1, x0
     mov     OADDEND2, x1
     mov     OSUM, x2
-    // unsigned long ulCarry;
-    // unsigned long ulSum;
-    // long lIndex;
-    // long lSumLength;
+
     // if (oAddend1->lLength <= oAddend2->lLength) goto else1;
     ldr     x0, [x0]
     ldr     x1, [x1]
     cmp     x0, x1
     ble     else1
+
     // lSumLength = oAddend1->lLength;
     mov     LSUMLENGTH, x0
+
     // goto endif1;
     b       endif1
 
@@ -107,7 +107,8 @@ endBranch:
     // lIndex++;
     add     LINDEX, LINDEX, 1
 
-    bcc     carry0
+    bcs     carry0
+
 carry1:
     mov     x4, 1
     b       endBranch2
@@ -122,8 +123,6 @@ endBranch2:
 endLoop:
     // Check for a carry out of the last "column" of the addition.
     // if (ulCarry != 1) goto endif5;
-    // cmp     ULCARRY, 1
-    // bne     endif5
     cmp      x4, 1
     bne      endif5
 

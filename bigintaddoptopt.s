@@ -167,5 +167,4 @@ endif5:
     ldr     x25, [sp, 56]
     add     sp, sp, ADD_STACK_BYTECOUNT
     ret
-
-.size   BigInt_add, (. - BigInt_add)
+    .size   BigInt_add, (. - BigInt_add)

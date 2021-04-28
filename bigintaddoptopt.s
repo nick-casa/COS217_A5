@@ -61,17 +61,13 @@ else1:
     mov     LSUMLENGTH, x1
 
 endif1:
-    // Determine the larger length.
-    // lSumLength = BigInt_larger(oAddend1->lLength, oAddend2->lLength);
-    // ldr     x0, [x0]
-    // ldr     x1, [x1]
-    // bl       BigInt_larger
-    // mov     LSUMLENGTH, x0
+
     // Clear oSum's array if necessary.
     // if (oSum->lLength <= lSumLength) goto endif2;
     ldr     x2, [OSUM]
     cmp     x2, LSUMLENGTH
     ble     endif2
+
     //  memset(oSum->aulDigits, 0, MAX_DIGITS * sizeof(unsigned long));
     add     x0, OSUM, 8
     mov     x1, 0
@@ -79,6 +75,7 @@ endif1:
     mov     x3, SIZE_UNSIGNEDLONG
     mul     x2, x2, x3
     bl      memset
+
 endif2:
     // Perform the addition.
     // ulCarry = 0;
@@ -127,8 +124,10 @@ endif4:
     mov     x0, ULSUM
     add     x1, OSUM, 8
     str     x0, [x1, LINDEX, lsl 3]
+
     // lIndex++;
     add     LINDEX, LINDEX, 1
+
     // if(lIndex < lSumLength) goto loop1;
     cmp     LINDEX, LSUMLENGTH
     blt     loop1

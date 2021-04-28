@@ -110,7 +110,7 @@ loop1:
     b       endBranch
 
 loop0:
-    adcs   x0, x0, xzr
+    adcs    x0, x0, xzr
 
 endBranch:
 
@@ -143,8 +143,16 @@ carryis0:
 
 endBranch2:
     // if(lIndex < lSumLength) goto loop1;
+    bcs     setcarry1
+    bcc     setcarry0
+
+setcarry1:
     cmp     LINDEX, LSUMLENGTH
     blt     loop1
+    b       endLoop
+setcarry0:
+    cmp     LINDEX,LSUMLENGTH
+    blt     loop0
 
 endLoop:
 

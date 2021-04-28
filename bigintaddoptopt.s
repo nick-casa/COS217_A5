@@ -100,9 +100,9 @@ endBranch:
     adcs    ULSUM, ULSUM, x1
 
     // oSum->aulDigits[lIndex] = ulSum;
-    mov     x0, ULSUM
+    //mov     x0, ULSUM
     add     x1, OSUM, 8
-    str     x0, [x1, LINDEX, lsl 3]
+    str     ULSUM, [x1, LINDEX, lsl 3]
 
     // lIndex++;
     add     LINDEX, LINDEX, 1

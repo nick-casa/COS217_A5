@@ -114,7 +114,6 @@ endBranch:
 
     // lIndex++;
     add     LINDEX, LINDEX, 1
-    bcs     carryis1
     bcc     carryis0
 
 carryis1:

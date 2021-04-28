@@ -80,8 +80,7 @@ endif1:
 endif2:
     // Perform the addition.
     mov     LINDEX, 0
-    // set carry to 0
-    mov     x4, 0
+
     // if(lIndex >= lSumLength) goto endLoop;
     cmp     LINDEX, LSUMLENGTH
     bge     endLoop

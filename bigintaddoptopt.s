@@ -110,7 +110,7 @@ endBranch:
     bcc     carry0
 carry1:
     mov     x4, 1
-    b endBranch2
+    b       endBranch2
 carry0:
     mov     x4, 0
 

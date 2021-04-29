@@ -91,7 +91,7 @@ endif2:
 
 endBranch:
     // ulSum = ulCarry
-    adcs    x0, x0, xzr
+    cmp     x0,x0
 
     // ulSum += oAddend1->aulDigits[lIndex]
     ldr     x7, [x5, LINDEX, lsl 3]
@@ -102,6 +102,7 @@ endBranch:
     bcc     addCarryNotSet
     add     ULSUM, ULSUM, x9
     b       postAdd
+
 addCarryNotSet:
     adcs    ULSUM, ULSUM, x9
 
@@ -110,7 +111,7 @@ postAdd:
     str     ULSUM, [x0, LINDEX, lsl 3]
 
     // lIndex++;
-    add     LINDEX, LINDEX, TRUE
+    add     LINDEX, LINDEX, 1
 
     bcc     carry0;
 carry1:
@@ -147,10 +148,10 @@ endLoop:
 
 endif6:
     // oSum->aulDigits[lSumLength] = 1;
-    mov     x4, TRUE
+    mov     x4, 1
     str     x4, [x0, LSUMLENGTH, lsl 3]
     // lSumLength++;
-    add     LSUMLENGTH,LSUMLENGTH, TRUE
+    add     LSUMLENGTH,LSUMLENGTH,1
 
 endif5:
     // oSum->lLength = lSumLength;

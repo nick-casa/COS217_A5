@@ -134,7 +134,7 @@ endLoop:
     bne     endif6
     // return FALSE;
     mov     x0, FALSE
-    b       ret
+    b       return
 
 endif6:
     // oSum->aulDigits[lSumLength] = 1;
@@ -149,7 +149,7 @@ endif5:
     // return TRUE;
     mov     x0, TRUE
 
-ret:
+return:
     ldr     x30, [sp]
     ldr     x19, [sp, 8]
     ldr     x20, [sp, 16]

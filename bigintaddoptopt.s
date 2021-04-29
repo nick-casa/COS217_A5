@@ -91,7 +91,7 @@ endif2:
 
 endBranch:
     // ulSum = ulCarry
-    cmp     x0,x0
+    adcs    x0, x0, xzr
 
     // ulSum += oAddend1->aulDigits[lIndex]
     ldr     x7, [x5, LINDEX, lsl 3]

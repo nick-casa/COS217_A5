@@ -3,17 +3,17 @@ Assignment 5 readme File
 ------------------------------------------------------------------------
 Student 1: What is your name?
 
-
+Nickolas Casalinuovo
 
 ------------------------------------------------------------------------
 Student 2: What is your name?
 
-
+Alina Chen
 
 ------------------------------------------------------------------------
 How many late days are you using on this assignment?
 
-
+2
 
 ------------------------------------------------------------------------
 Student 1: What authorized sources of information did you use to
@@ -21,6 +21,16 @@ complete the assignment? COPY THE LIST of authorized sources of
 information given in the "Policies" web page to this section of the
 readme file, and edit it as appropriate.
 
+The course's lectures.
+The course's precepts.
+The course's website.
+Documents that are referenced directly by the course's website.
+Such documents include the course's lecture slides and precept handouts.
+The course's textbooks.
+The course's current staff members outside of class time through office hours.
+The course's current staff members outside of class time through meetings.
+The course's current staff members outside of class time through e-mail.
+Current lab teaching assistants through visits to the course labs.
 
 
 ------------------------------------------------------------------------
@@ -29,6 +39,16 @@ complete the assignment? COPY THE LIST of authorized sources of
 information given in the "Policies" web page to this section of the
 readme file, and edit it as appropriate.
 
+The course's lectures.
+The course's precepts.
+The course's website.
+Documents that are referenced directly by the course's website.
+Such documents include the course's lecture slides and precept handouts.
+The course's textbooks.
+The course's current staff members outside of class time through office hours.
+The course's current staff members outside of class time through meetings.
+The course's current staff members outside of class time through e-mail.
+Current lab teaching assistants through visits to the course labs.
 
 
 ------------------------------------------------------------------------
@@ -43,7 +63,7 @@ nature of the interaction, may additionally require the interaction
 being reported to the Committee on Discipline. Write "None" if you used
 no unauthorized sources of information.
 
-
+None
 
 ------------------------------------------------------------------------
 Student 2: What unauthorized sources of information did you use to
@@ -57,19 +77,23 @@ nature of the interaction, may additionally require the interaction
 being reported to the Committee on Discipline. Write "None" if you used
 no unauthorized sources of information.
 
-
+None
 
 ------------------------------------------------------------------------
 Student 1: What is your assessment of the assignment? Was it helpful?
 Was it fun?
 
-
+This assignment was not the most fun if I am being honest. I felt
+like we have learned enough to do all of the challenge portions before,
+but for this assignment, I feel like I had to teach myself extra
+commands and learn how carries work.
 
 ------------------------------------------------------------------------
 Student 2: What is your assessment of the assignment? Was it helpful?
 Was it fun?
 
-
+Helpful for learning how to write in assembly but the challenge portion
+was difficult
 
 ------------------------------------------------------------------------
 (optional) What information can you provide about your submission that
@@ -81,32 +105,47 @@ particular, what bugs are in your submission?
 ------------------------------------------------------------------------
 What is your mywc program test plan?
 
+To test mywc, we will compose boundary, statement, and stress tests that
+ensure that the program is doing exactly what we want it to do in every
+case scenario.
 
 Boundary tests:
 
-mywcXXX.txt: Description of the characteristics of that file, and how it tests boundary conditions of the mywc.c and mywc.s programs.
-mywc100.txt: Empty file, tests if there are 0 new lines, words and characters
-mywc101.txt: One space character
-mywc102.txt: One new line
-mywc103.txt: One character
-mywc104.txt: One character on second line
-mywc105.txt: New line, space, character, space, new line
+mywc100.txt: Empty file, tests if there are 0 new lines, words and
+    characters.
+mywc101.txt: One space character. Tests if it can pick up one space
+    without a new line or char
+mywc102.txt: One new line. Tests if it can pick up one new line
+    without a space or char
+mywc103.txt: One character. Tests if it can pick up one new char
+    without a space or new line
+mywc104.txt: One character on second line. Tests if the program
+    can pick up on a sandwiched character and both new lines
+mywc105.txt: New line, space, character, space, new line.
+    Tests a char surrounded by spaces and new lines.
 
 Statement tests:
 
-mywcXXX.txt: Description of the characteristics of that file, and which lines of the mywc.c and mywc.s programs it causes the computer to execute.
-mywc200.txt: Executes all lines of mywc.c.
-// Starts with a space to enter the loop, next character (not a space) tests the else conditional
+mywc200.txt: Executes all lines of mywc.c. First, the space gets it
+into the loop on line 30. Then, since it enters the loop, line 31
+gets executed. Then, since the first letter is a space, it enters
+the conditional on line 33, then in the first iteration, it does
+not hit the condition on line 34. Then, when the loop hits the first
+"a", the "else" of the conditional on line 39 gits hit along with the
+conditional on line 40. Then, when the second space is iterated over,
+the conditional on like 34 is hit, along with the statements in 35
+and 36. Finally, when the new line is hit, the conditional on line
+42 is entered. Since the last char is a part of a word, line 45 also
+gets executed.
 
-"This file contains such-and-such characteristics, and so causes the
-computer to execute lines x, y, ..., and z of the given mywc.c"
-(where x, y, ..., and z are line numbers). Collectively your statement
-test files should cause the computer to execute all lines of the given
-mywc.c file (and so, by assumption, all lines of your mywc.s file).
+
 
 Stress tests:
 
-mywcXXX.txt: Description of the characteristics of that file, and how it stress tests the mywc.c and mywc.s programs.
+mywc300-302.txt: The file is a set of 50,000 chars split across 1,000
+lines. This is a procedurally generated file which makes each of the
+files pseudo-random. By testing pure volume, we can test the outcome
+of the program on long files.
 
 
 ------------------------------------------------------------------------
@@ -121,7 +160,7 @@ Part 2d:  7.910000 seconds
 
 Part 2e:  3.580000 seconds
 
-Part 2f:  3.020000 seconds
+Part 2f:  2.950000 seconds
 
 
 

@@ -11,7 +11,6 @@
         // distinct from oAddend1 and oAddend2.  Return 0 (FALSE) if an
         // overflow occurred, and 1 (TRUE) otherwise.
         // Must be a multiple of 16
-
         .equ    ADD_STACK_BYTECOUNT, 48
 
         // Local variables stack offsets:

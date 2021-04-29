@@ -6,19 +6,24 @@
         .equ    FALSE, 0
 //----------------------------------------------------------------------
         .section .text
+
         // Assign the sum of oAddend1 and oAddend2 to oSum.  oSum should be
         // distinct from oAddend1 and oAddend2.  Return 0 (FALSE) if an
         // overflow occurred, and 1 (TRUE) otherwise.
         // Must be a multiple of 16
+
         .equ    ADD_STACK_BYTECOUNT, 48
+
         // Local variables stack offsets:
         LSUMLENGTH  .req x24
         LINDEX      .req x23
         ULSUM       .req x22
+
         // Parameter stack offsets:
         OSUM        .req x21
         OADDEND2    .req x20 //callee-saved
         OADDEND1    .req x19
+
         .equ    MAX_DIGITS, 32768
         .equ    SIZE_UNSIGNEDLONG, 8
         .global BigInt_add
@@ -75,12 +80,12 @@ endif1:
 endif2:
     // Perform the addition.
     mov     LINDEX, 0
-        mov     ULSUM, 0
-        add x5, OADDEND1, 8
-        add x6, OADDEND2, 8
-   // add     x4, OSUM, 8
+    mov     ULSUM, 0
+    add x5, OADDEND1, 8
+    add x6, OADDEND2, 8
+    // add     x4, OSUM, 8
 
-  // if(lIndex >= lSumLength) goto endLoop;
+    // if(lIndex >= lSumLength) goto endLoop;
     cmp     LINDEX, LSUMLENGTH
     bge     endLoop
 
@@ -89,14 +94,11 @@ endBranch:
     adcs    x0, x0, xzr
 
     // ulSum += oAddend1->aulDigits[lIndex]
-    //add     x5, OADDEND1, 8
     ldr     x7, [x5, LINDEX, lsl 3]
     adcs    ULSUM, ULSUM, x7
 
     //  ulSum += oAddend2->aulDigits[lIndex];
-   // add     x6, OADDEND2, 8
     ldr     x9, [x6, LINDEX, lsl 3]
-
     bcc     addCarryNotSet
     add     ULSUM, ULSUM, x9
     b       postAdd
@@ -105,17 +107,17 @@ addCarryNotSet:
 
 postAdd:
     // oSum->aulDigits[lIndex] = ulSum;
-    //add     x1, OSUM, 8
     str     ULSUM, [x0, LINDEX, lsl 3]
+
     // lIndex++;
     add     LINDEX, LINDEX, 1
 
     bcc     carry0;
 carry1:
-    mov     ULSUM, 1
+    mov     ULSUM, TRUE
     b       endBranch2
 carry0:
-    mov     ULSUM, 0
+    mov     ULSUM, FALSE
 
 endBranch2:
     // if(lIndex < lSumLength) goto loop1;
@@ -146,8 +148,6 @@ endLoop:
 endif6:
     // oSum->aulDigits[lSumLength] = 1;
     mov     x4, 1
-  // add     x1, OSUM, 8
-   // mov     x2, LSUMLENGTH
     str     x4, [x0, LSUMLENGTH, lsl 3]
     // lSumLength++;
     add     LSUMLENGTH,LSUMLENGTH,1

@@ -117,8 +117,8 @@ mywc101.txt: One space character. Tests if it can pick up one space
     without a new line or char
 mywc102.txt: One new line. Tests if it can pick up one new line
     without a space or char
-mywc103.txt: One character. Tests if it can pick up one new char
-    without a space or new line
+mywc103.txt: One non white-space character.Tests if it can pick up one
+    new char without a space or new line
 mywc104.txt: One character on second line. Tests if the program
     can pick up on a sandwiched character and both new lines
 mywc105.txt: New line, space, character, space, new line.

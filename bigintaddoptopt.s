@@ -13,17 +13,17 @@
         // Must be a multiple of 16
         .equ    ADD_STACK_BYTECOUNT, 48
 
-        // Local variables stack offsets:
-        LSUMLENGTH  .req x24
-        LINDEX      .req x23
-        ULSUM       .req x22
+        // Local variables registers:
+        LSUMLENGTH  .req x24 // callee-saved
+        LINDEX      .req x23 // callee-saved
+        ULSUM       .req x22 // callee-saved
 
-        // Parameter stack offsets:
-        OSUM        .req x21
-        OADDEND2    .req x20 //callee-saved
-        OADDEND1    .req x19
+        // Parameter registers
+        OSUM        .req x21 // callee-saved
+        OADDEND2    .req x20 // callee-saved
+        OADDEND1    .req x19 // callee-saved
 
-        .equ    MAX_DIGITS, 32768
+        .equ    MAX_DIGITS, 32768  
         .equ    SIZE_UNSIGNEDLONG, 8
         .global BigInt_add
 
@@ -77,17 +77,19 @@ endif1:
 
 endif2:
     // Perform the addition.
+    // lIndex = 0    
     mov     LINDEX, 0
+    // ulSum = 0    
     mov     ULSUM, 0
-    add x5, OADDEND1, 8
-    add x6, OADDEND2, 8
+    add x5, OADDEND1, 8  // x5 has oAddend1->aulDigits
+    add x6, OADDEND2, 8  // x6 has oAddend1->aulDigits
 
     // if(lIndex >= lSumLength) goto endLoop;
     cmp     LINDEX, LSUMLENGTH
     bge     endLoop
 
-endBranch:
-    // ulSum = ulCarry
+loop:
+    // set carry flag to 0
     adcs    x0, x0, xzr
 
     // ulSum += oAddend1->aulDigits[lIndex]
@@ -111,21 +113,21 @@ postAdd:
     add     LINDEX, LINDEX, 1
 
     bcc     carry0;
-carry1:
-    mov     ULSUM, TRUE
-    b       endBranch2
-carry0:
-    mov     ULSUM, FALSE
+carry1: // ULSUM = 1 if carry flag is 1
+    mov     ULSUM, 1
+    b       endBranch
+carry0: // ULSUM = 0 if carry flag is 0
+    mov     ULSUM, 0
 
-endBranch2:
+endBranch:
     // if(lIndex < lSumLength) goto loop1;
     cmp     LINDEX, LSUMLENGTH
-    blt     endBranch
+    blt     loop
 
 endLoop:
     // Check for a carry out of the last "column" of the addition.
     // if (ulCarry != 1) goto endif5;
-    cmp      ULSUM, TRUE
+    cmp      ULSUM, 1
     bne      endif5
 
     // if (lSumLength != MAX_DIGITS) goto endif6;

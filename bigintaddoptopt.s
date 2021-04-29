@@ -110,7 +110,7 @@ postAdd:
     str     ULSUM, [x0, LINDEX, lsl 3]
 
     // lIndex++;
-    add     LINDEX, LINDEX, 1
+    add     LINDEX, LINDEX, TRUE
 
     bcc     carry0;
 carry1:
@@ -147,10 +147,10 @@ endLoop:
 
 endif6:
     // oSum->aulDigits[lSumLength] = 1;
-    mov     x4, 1
+    mov     x4, TRUE
     str     x4, [x0, LSUMLENGTH, lsl 3]
     // lSumLength++;
-    add     LSUMLENGTH,LSUMLENGTH,1
+    add     LSUMLENGTH,LSUMLENGTH, TRUE
 
 endif5:
     // oSum->lLength = lSumLength;

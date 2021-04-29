@@ -127,7 +127,7 @@ endBranch2:
 endLoop:
     // Check for a carry out of the last "column" of the addition.
     // if (ulCarry != 1) goto endif5;
-    cmp      ULSUM, 1
+    cmp      ULSUM, TRUE
     bne      endif5
 
     // if (lSumLength != MAX_DIGITS) goto endif6;

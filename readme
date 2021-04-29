@@ -138,7 +138,8 @@ and 36. Finally, when the new line is hit, the conditional on line
 42 is entered. Since the last char is a part of a word, line 45 also
 gets executed.
 
-
+Since the .s is a duplicate of the .c, all of the logic from above
+applies to the assembly as well.
 
 Stress tests:
 

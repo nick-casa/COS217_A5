@@ -147,8 +147,8 @@ endLoop:
 
 endif6:
     // oSum->aulDigits[lSumLength] = 1;
-    mov     x4, 1
-    str     x4, [x0, LSUMLENGTH, lsl 3]
+    //mov     x4, 1
+    str     TRUE, [x0, LSUMLENGTH, lsl 3]
     // lSumLength++;
     add     LSUMLENGTH,LSUMLENGTH,1
 

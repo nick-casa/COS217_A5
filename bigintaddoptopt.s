@@ -72,8 +72,8 @@ endif1:
     //  memset(oSum->aulDigits, 0, MAX_DIGITS * sizeof(unsigned long));
    // add     x0, OSUM, 8
     mov     x1, 0
-    // mov     x2, MAX_DIGITS
-    // mov     x3, SIZE_UNSIGNEDLONG
+    mov     x2, MAX_DIGITS
+    mov     x3, SIZE_UNSIGNEDLONG
     mul     x2, MAX_DIGITS, SIZE_UNSIGNEDLONG
     bl      memset
 

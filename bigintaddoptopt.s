@@ -80,8 +80,9 @@ endif2:
     // Perform the addition.
     mov     LINDEX, 0
     mov     ULSUM, 0
-    add x5, OADDEND1, 8
-    add x6, OADDEND2, 8
+    add     x5, OADDEND1, 8
+    add     x6, OADDEND2, 8
+    mov     x8, 1
 
     // if(lIndex >= lSumLength) goto endLoop;
     cmp     LINDEX, LSUMLENGTH
@@ -109,7 +110,7 @@ postAdd:
     str     ULSUM, [x0, LINDEX, lsl 3]
 
     // lIndex++;
-    add     LINDEX, LINDEX, 1
+    add     LINDEX, LINDEX, x8
 
     bcc     carry0;
 carry1:
@@ -138,10 +139,9 @@ endLoop:
 
 endif6:
     // oSum->aulDigits[lSumLength] = 1;
-    mov     x4, 1
-    str     x4, [x0, LSUMLENGTH, lsl 3]
+    str     x8, [x0, LSUMLENGTH, lsl 3]
     // lSumLength++;
-    add     LSUMLENGTH,LSUMLENGTH,1
+    add     LSUMLENGTH,LSUMLENGTH,x8
 
 endif5:
     // oSum->lLength = lSumLength;

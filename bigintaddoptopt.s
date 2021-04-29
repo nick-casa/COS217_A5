@@ -70,7 +70,6 @@ endif1:
     ble     endif2
 
     //  memset(oSum->aulDigits, 0, MAX_DIGITS * sizeof(unsigned long));
-   // add     x0, OSUM, 8
     mov     x1, 0
     mov     x2, MAX_DIGITS
     mov     x3, SIZE_UNSIGNEDLONG
@@ -83,7 +82,6 @@ endif2:
     mov     ULSUM, 0
     add x5, OADDEND1, 8
     add x6, OADDEND2, 8
-    // add     x4, OSUM, 8
 
     // if(lIndex >= lSumLength) goto endLoop;
     cmp     LINDEX, LSUMLENGTH

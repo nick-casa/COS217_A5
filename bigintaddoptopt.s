@@ -73,7 +73,7 @@ endif1:
     mov     x1, 0
     mov     x2, MAX_DIGITS
     mov     x3, SIZE_UNSIGNEDLONG
-    mul     x2, MAX_DIGITS, SIZE_UNSIGNEDLONG
+    mul     x2, x2, x3
     bl      memset
 
 endif2:

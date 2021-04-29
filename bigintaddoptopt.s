@@ -134,15 +134,7 @@ endLoop:
     bne     endif6
     // return FALSE;
     mov     x0, FALSE
-    ldr     x30, [sp]
-    ldr     x19, [sp, 8]
-    ldr     x20, [sp, 16]
-    ldr     x21, [sp, 24]
-    ldr     x22, [sp, 32]
-    ldr     x23, [sp, 40]
-    ldr     x24, [sp, 48]
-    add     sp, sp, ADD_STACK_BYTECOUNT
-    ret
+    b       ret
 
 endif6:
     // oSum->aulDigits[lSumLength] = 1;
@@ -156,6 +148,8 @@ endif5:
     str     LSUMLENGTH, [OSUM]
     // return TRUE;
     mov     x0, TRUE
+
+ret:
     ldr     x30, [sp]
     ldr     x19, [sp, 8]
     ldr     x20, [sp, 16]
